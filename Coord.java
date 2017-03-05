@@ -4,6 +4,7 @@
  * Classe Coord - traitement des coordonnées 
  * 
  */
+
 package jalon1;
 
 public class Coord {
