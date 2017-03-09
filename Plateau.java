@@ -14,8 +14,8 @@ public class Plateau {
 		this.plateau = new char[taille][taille];
 		this.listeRobot = new ArrayList<>();
 		this.listeElement = new ArrayList<>();
-		this.listeMine = new ArrayList<>();
-		this.listeMine = new ArrayList<>();
+		this.listeMine = new ArrayList<>();//pourquoi t'attribut 2 fois la meme chose au meme atribut 
+		this.listeMine = new ArrayList<>(); //Si c'est une listeMine par joueur, faut listeMine1 et listeMine2
 	}
 	
 	public Plateau(int nbLigne, int nbColonne) {
@@ -23,7 +23,7 @@ public class Plateau {
 		this.listeRobot = new ArrayList<>();
 		this.listeElement = new ArrayList<>();
 		this.listeMine = new ArrayList<>();
-		this.listeMine = new ArrayList<>();
+		this.listeMine = new ArrayList<>(); //Idem
 	}
 
 	public ArrayList<Robot> getListeRobot() {
