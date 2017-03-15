@@ -1,12 +1,14 @@
 package Plateaux;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Plateau {
 	private int taille = 20; 
 	private char[][] plateau;
 	private Equipe equipe1;
 	private Equipe equipe2;
+	private ArrayList<Obstacle> listeObstacle;
 	
 	public Plateau(){
 		this.plateau = new char[taille][taille];
@@ -26,9 +28,20 @@ public class Plateau {
 		equipe2.getListeMine = new ArrayList<>();
 		plateau[nbLigne][nbLigne] = 'e';
 		plateau[nbColonne][nbColonne] = 'E';
-	}	
-
+	}
 	
+	public placeObstacle() {
+		for (int ligne = 0; ligne < plateau.length; ligne++) {
+			for (int colonne = 0; colonne < plateau[0].length; colonne++) {
+				Random random = new Random();
+				if (random.nextDouble() < 0.2) {
+					Obstacle obstacle = new Obstacle(ligne,colonne);
+					plateau[ligne][colonne] = obstacle.getPion();
+				}
+			}
+		}
+	}
+
 	public char[][] getPlateau() {
 		return plateau;
 	}
