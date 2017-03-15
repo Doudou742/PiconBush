@@ -26,8 +26,9 @@ public class Plateau {
 		equipe1.getListeMine = new ArrayList<>();
 		equipe2.getListeRobot = new ArrayList<>();
 		equipe2.getListeMine = new ArrayList<>();
-		plateau[nbLigne][nbLigne] = 'e';
-		plateau[nbColonne][nbColonne] = 'E';
+		plateau[0][0] = 'e';
+		plateau[nbLigne][nbColonne] = 'E';
+		placeObstacle();
 	}
 	
 	public placeObstacle() {
