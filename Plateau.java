@@ -1,55 +1,34 @@
 package Plateaux;
 
-
 import java.util.ArrayList;
 
 public class Plateau {
-	final private int taille = 20; 
-	private ArrayList<Robot> listeRobot;
-	private ArrayList<Element> listeElement;
-	private ArrayList<Mine> listeMine;
+	private int taille = 20; 
 	private char[][] plateau;
+	private Equipe equipe1;
+	private Equipe equipe2;
 	
 	public Plateau(){
 		this.plateau = new char[taille][taille];
-		this.listeRobot = new ArrayList<>();
-		this.listeElement = new ArrayList<>();
-		this.listeMine = new ArrayList<>();//pourquoi t'attribut 2 fois la meme chose au meme atribut 
-		this.listeMine = new ArrayList<>(); //Si c'est une listeMine par joueur, faut listeMine1 et listeMine2
+		equipe1.getListeRobot = new ArrayList<>();
+		equipe1.getListeMine = new ArrayList<>();
+		equipe2.getListeRobot = new ArrayList<>();
+		equipe2.getListeMine = new ArrayList<>();
+		plateau[0][0] = 'e';
+		plateau[20][20] = 'E';
 	}
 	
 	public Plateau(int nbLigne, int nbColonne) {
 		this.plateau = new char[nbLigne][nbColonne];
-		this.listeRobot = new ArrayList<>();
-		this.listeElement = new ArrayList<>();
-		this.listeMine = new ArrayList<>();
-		this.listeMine = new ArrayList<>(); //Idem
-	}
+		equipe1.getListeRobot = new ArrayList<>();
+		equipe1.getListeMine = new ArrayList<>();
+		equipe2.getListeRobot = new ArrayList<>();
+		equipe2.getListeMine = new ArrayList<>();
+		plateau[nbLigne][nbLigne] = 'e';
+		plateau[nbColonne][nbColonne] = 'E';
+	}	
 
-	public ArrayList<Robot> getListeRobot() {
-		return listeRobot;
-	}
-
-	public void setListeRobot(ArrayList<Robot> listeRobot) {
-		this.listeRobot = listeRobot;
-	}
-
-	public ArrayList<Element> getListeElement() {
-		return listeElement;
-	}
-
-	public void setListeElement(ArrayList<Element> listeElement) {
-		this.listeElement = listeElement;
-	}
-
-	public ArrayList<Mine> getListeMine() {
-		return listeMine;
-	}
-
-	public void setListeMine(ArrayList<Mine> listeMine) {
-		this.listeMine = listeMine;
-	}
-
+	
 	public char[][] getPlateau() {
 		return plateau;
 	}
@@ -62,6 +41,16 @@ public class Plateau {
 		return taille;
 	}
 	
+	public String toString(){ 
+		String rep = "";
+		for (int i = 0; i < plateau.length; i++) {
+			for (int j = 0; j < plateau[0].length; j++) {
+				rep += plateau[i][j];
+			}
+			rep += "\n"	;
+		}
+		System.out.println(rep);
+	}
 	
 	
 }
