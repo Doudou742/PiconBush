@@ -1,11 +1,11 @@
 package elements;
 
-public class Mines {
+public class Mine {
 	private	int degats;
 	private Coord coordonnee;
 	
 	
-	public Mines(Coord coordonnee, Robot robot){
+	public Mine(Coord coordonnee, Robot robot){
 		this.coordonnee=coordonnee;
 		if(robot.getType = 't' || robot.getType ='T'){
 			this.degats = -3;
