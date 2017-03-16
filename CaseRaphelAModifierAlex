@@ -1,0 +1,38 @@
+
+public class Case{
+	private Robot unRobot;
+	private Mine uneMine;
+	private Obstacle obstacle;
+	private Coord coordonnee;
+	
+	public Case(int x, int y, ){
+		this.coordonnee = new Coord(x,y);
+		unRobot = null;
+		uneMine = null;
+		unObstacle = null;
+	}
+	
+	public boolean estLibre(){
+		// Si c'est ni un robot, ni une mine , ni un obstacle;
+		return unRobot.equals(null) && uneMine.equals(null) && unObstacle.equals(null);
+	}
+	public Coord getCoordonnee(){
+		return coordonnee;
+	}
+	public boolean estRobot(){
+		return uneMine.equals(null) && unObstacle.equals(null) && this.estLibre().equals(null);
+	}
+	
+	public boolean estMine(){
+		return unRobot.equals(null) && unObstacle.equals(null) && this.estLibre().equals(null);
+	}
+	
+	public boolean estObstacle(){
+		return unRobot.equals(null) && uneMine.equals(null) && this.estLibre().equals(null);
+	}
+	
+	public String toString(){
+		return "";
+		
+	}
+}
