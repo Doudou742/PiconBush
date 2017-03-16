@@ -77,15 +77,17 @@ public class Case {
 		return coordonnee;
 	}
 	public boolean estRobot(){
-		return uneMine.equals(null) && unObstacle.equals(null) && this.estLibre().equals(null);
-	}
+		
+		return uneMine.equals(null) && unObstacle.equals(null) && ! this.estLibre();
+	
+	 }
 	
 	public boolean estMine(){
-		return unRobot.equals(null) && unObstacle.equals(null) && this.estLibre().equals(null);
+		return unRobot.equals(null) && unObstacle.equals(null) && ! this.estLibre();
 	}
 	
 	public boolean estObstacle(){
-		return unRobot.equals(null) && uneMine.equals(null) && this.estLibre().equals(null);
+		return unRobot.equals(null) && uneMine.equals(null) && ! this.estLibre();
 	}
 	
 	public String toString(){
