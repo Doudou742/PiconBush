@@ -69,11 +69,54 @@ public class Case {
 		return this.coordonnee;
 	}
 	
+	public boolean estLibre(){
+		// Si c'est ni un robot, ni une mine , ni un obstacle;
+		return unRobot.equals(null) && uneMine.equals(null) && unObstacle.equals(null);
+	}
+	public Coord getCoordonnee(){
+		return coordonnee;
+	}
+	public boolean estRobot(){
+		return uneMine.equals(null) && unObstacle.equals(null) && this.estLibre().equals(null);
+	}
+	
+	public boolean estMine(){
+		return unRobot.equals(null) && unObstacle.equals(null) && this.estLibre().equals(null);
+	}
+	
+	public boolean estObstacle(){
+		return unRobot.equals(null) && uneMine.equals(null) && this.estLibre().equals(null);
+	}
+	
+	public String toString(){
+		return "";
+		
+	}
+	
+	public Object contient(){
+		if(this.estRobot()){
+			return this.getRobot();
+		}
+		if(this.estMine()){
+			return this.getMine();
+		}
+		if(this.estObstacle()){
+			return this.getObstacle();
+		}
+		return null;
+	}
 	
 	
 	
+	public Robot getRobot(){
+		return this.unRobot;
+	}
 	
+	public Obstacle getObstacle(){
+		return this.unObstacle;
+	}
 	
-	
-	
+	public Mine getMine(){
+		return this.uneMine;
+	}
 }
