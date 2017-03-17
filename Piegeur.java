@@ -10,8 +10,8 @@ public class Piegeur extends Robot {
 	private final int DEGAT = -2;
 	private int nbMine;
 
-	public Piegeur(int equip, Plateau p, String type, Coord coordonnee, char[][] plateau,Equipe equipe) {
-		super(type, coordonnee, plateau, p,equipe);
+	public Piegeur(String type, Coord coordonnee,Equipe equipe) {
+		super(type, coordonnee,equipe);
 		energie = 50;
 		if (super.getEquipe().isEquipe()== true) {
 			PIEGEUR = 'p';
@@ -22,10 +22,10 @@ public class Piegeur extends Robot {
 	}
 
 	public boolean deplacement(Coord coordonnee) {
-		if (super.getPlateau()[super.getCoordonnee().getPositionX() + coordonnee.getPositionX()][super.getCoordonnee()
-				.getPositionY() + coordonnee.getPositionY()] != ' ') {
+		if (Plateau.plateau[super.getCoordonnee().getPositionX() + coordonnee.getPositionX()][super.getCoordonnee()
+				.getPositionY() + coordonnee.getPositionY()].estLibre()) {
 			return false;
-		} else if (super.getCoordonnee().getPositionX() + coordonnee.getPositionX() == 10 || super.getCoordonnee().getPositionY() + coordonnee.getPositionY() == 10) {
+		} else if (super.getCoordonnee().getPositionX() + coordonnee.getPositionX() == Plateau.plateau.length|| super.getCoordonnee().getPositionY() + coordonnee.getPositionY() == Plateau.plateau[0].length) {
 			return false;
 		} else {
 			super.getCoordonnee().ajouterCoord(coordonnee);
