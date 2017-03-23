@@ -41,7 +41,10 @@ public abstract class Cellule {
 		return obstacle;
 	}
 	
-	
+	public Robot getUnRobot() {
+		return unRobot;
+	}
+
 	abstract void deplaceSur(Robot unRobot);
 	abstract void ajoute(int equipe);
 	abstract void videCase();
