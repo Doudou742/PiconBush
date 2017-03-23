@@ -15,6 +15,7 @@ abstract public class Robot {
 		this.vue=vue;
 		coordonnee=new Coord(x,y);
 		this.equipe=equipe;
+		
 	}
 	
 	abstract public boolean peutTirer();
@@ -59,8 +60,7 @@ abstract public class Robot {
 	
 	abstract public int getCoutAction();
 	abstract public int getCoutDep();
-	abstract public int getDegatTir();
-	abstract public int getDegatMine();
+	abstract public int getDegat();
 	abstract public String getType();
 	abstract public List<Coord> getDeplacement();
 	
