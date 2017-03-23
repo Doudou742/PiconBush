@@ -1,3 +1,4 @@
+package personnages;
 
 public abstract class Cellule {
 	
@@ -6,10 +7,12 @@ public abstract class Cellule {
 	private Robot unRobot;
 	private Coord uneCoord;
 	private String image;
+	protected boolean obstacle;
 	
 	public Cellule(int positionX,int positionY){
 		this.unRobot = null;
 		this.uneCoord = new Coord(positionX,positionY);
+		obstacle=false;
 		
 	}
 	
@@ -33,6 +36,11 @@ public abstract class Cellule {
 		
 		return this.image;
 	}
+	
+	public boolean contiensObstacle(){
+		return obstacle;
+	}
+	
 	
 	abstract void deplaceSur(Robot unRobot);
 	abstract void ajoute(int equipe);
