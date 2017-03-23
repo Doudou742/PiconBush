@@ -62,7 +62,6 @@ abstract public class Robot {
 	abstract public int getCoutDep();
 	abstract public int getDegat();
 	abstract public String getType();
-	abstract public List<Coord> getDeplacement();
 	
 
 	public void subitDegat(){
