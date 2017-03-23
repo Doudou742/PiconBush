@@ -29,26 +29,24 @@ public class Tireur extends Robot {
 
 	@Override
 	public int getCoutAction() {
-		// TODO Auto-generated method stub
-		return coutAction;
+		return Constantes.getCoutTirTireur();
 	}
 
 	@Override
 	public int getCoutDep() {
-		// TODO Auto-generated method stub
-		return coutDep;
+		return Constantes.getCoutDeplacementTireur();
+		
 	}
 
 	@Override
 	public int getDegat() {
-		// TODO Auto-generated method stub
-		return degat;
+		return Constantes.getDegatsTireur();
+		
 	}
 
 	@Override
 	public String getType() {
-		// TODO Auto-generated method stub
-		return type;
+		return this.type;
 	}
 
 	public String toString(){
