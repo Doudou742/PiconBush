@@ -2,6 +2,8 @@ package personnages;
 
 import java.util.List;
 
+import plateau.Plateau;
+
 abstract public class Robot {
 
 	private int energie;
@@ -23,7 +25,7 @@ abstract public class Robot {
 	
 	/* A modifier selon la classe vue */
 	public boolean estSurBase(){
-		if(vue.getPlateau[coordonnee.getPositionX()][coordonnee.getPositionY()].estBase()==vue.getEquipe()){
+		if(Plateau.grille[coordonnee.getPositionX()][coordonnee.getPositionY()].estBase()==vue.getEquipe()){
 			return true;
 		}
 		return false;
@@ -62,6 +64,7 @@ abstract public class Robot {
 	abstract public int getCoutDep();
 	abstract public int getDegat();
 	abstract public String getType();
+	abstract public boolean cibleVide(Cellule cellule);
 	
 
 	public void subitDegat(){

@@ -1,5 +1,7 @@
 package personnages;
 
+import plateau.Plateau;
+
 public abstract class Cellule {
 	
 	protected int mine = 0;
@@ -16,8 +18,8 @@ public abstract class Cellule {
 		
 	}
 	
-	public int contiensMine(){
-		return this.mine;
+	public boolean contiensMine(){
+		return mine!=0;
 	}
 	
 	public int estBase(){
@@ -30,11 +32,6 @@ public abstract class Cellule {
 	
 	public Robot getContenu(){
 		return this.unRobot;
-	}
-	
-	public String toString(){
-		
-		return this.image;
 	}
 	
 	public boolean contiensObstacle(){
@@ -51,16 +48,41 @@ public abstract class Cellule {
 	}
 	
 	public boolean estLibre(){
-		if(mine==0 && base==0 && unRobot==null && !obstacle){
+		if(base==0 && unRobot==null && !obstacle){
 			return true;
 		}else {
 			return false;
 		}
 	}
+	public void addObstacle(){
+		obstacle=true;
+	}
 
+
+	public boolean celluleValide(){
+		if(this.uneCoord.getPositionX()<Plateau.grille.length && this.uneCoord.getPositionY()<Plateau.grille[0].length){
+			return true;
+		}
+		return false;
+	}
 	abstract void deplaceSur(Robot unRobot);
 	abstract void ajoute(int equipe);
 	abstract void videCase();
+	
+	public String toString(){
+		if(mine!=0){
+			return "X";
+		}
+		else if (unRobot !=null){
+			unRobot.toString();
+		}
+		else if(obstacle){
+			return "O";
+		}else if(base!=0){
+			return "B";
+		}
+		return " ";
+	}
 		
 	
 }

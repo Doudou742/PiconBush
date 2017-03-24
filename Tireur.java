@@ -3,15 +3,19 @@ package personnages;
 
 public class Tireur extends Robot {
 
-	private static int deplacement = 1;
-	private static int coutAction = -2;
-	private static int coutDep = -1;
-	private static int degat = -3;
+	private static int deplacement;
+	private static int coutAction;
+	private static int coutDep;
+	private static int degat;
 	private static String type = "Tireur";
 
-	public Tireur(Vue vue, int energie, int equipe, int x, int y) {
+	public Tireur(Vue vue, int equipe, int x, int y) {
 		super(vue, x, y, equipe);
-		super.setEnergie(energie);
+		super.setEnergie(40);
+		deplacement=Constantes.getDeplacementTireur();
+		coutAction=Constantes.getCoutTirTireur();
+		coutDep=Constantes.getCoutDeplacementTireur();
+		degat=Constantes.getDegatsTireur();
 	}
 
 	public int getDeplacement() {
@@ -57,6 +61,12 @@ public class Tireur extends Robot {
 		}else{
 			return "   ";
 		}
+	}
+
+	@Override
+	public boolean cibleVide(Cellule cellule) {
+		// TODO Auto-generated method stub
+		return cellule.estLibre();
 	}
 
 }

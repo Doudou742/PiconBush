@@ -1,29 +1,31 @@
 package personnages;
 
+import plateau.Plateau;
+
 public class Vue {
 
 	private int equipe;
-	private Plateau plateau;
+	//private Plateau plateau;
 	
 	public Vue(int equipe, Plateau plateau){
 		this.equipe=equipe;
-		this.plateau=plateau;
+		//this.plateau=plateau;
 	}
 
 	public int getEquipe() {
 		return equipe;
 	}
 
-	public Plateau getPlateau() {
+	/*public Plateau getPlateau() {
 		return plateau;
-	}
+	}*/
 	
 	public void poserRobot(Robot robot, Coord coordonnee){
-		plateau[coordonnee.getPositionX()][coordonnee.getPositionY()]=robot;
+		Plateau.grille[coordonnee.getPositionX()][coordonnee.getPositionY()].deplaceSur(robot);;
 	}
 	
 	public void viderCase(Robot robot){ 
-		plateau[robot.getCoordonnee().getPositionX()][robot.getCoordonnee().getPositionY()].videCase();
+		Plateau.grille[robot.getCoordonnee().getPositionX()][robot.getCoordonnee().getPositionY()].videCase();
 	}
 	
 	//jvois pas à quoi ça sert  
@@ -33,13 +35,13 @@ public class Vue {
 	
 	
 	public void subitTir(Coord coordonnee){
-		plateau[coordonnee.getPositionX()][coordonnee.getPositionY()].getUnRobot().subitDegat();
+		Plateau.grille[coordonnee.getPositionX()][coordonnee.getPositionY()].getUnRobot().subitDegat();
 		
 	}
 	
 	//case vide ? 
 	public boolean estDisponible(Coord coordonnee){
-		return plateau[coordonnee.getPositionX()][coordonnee.getPositionY()].estLibre();
+		return Plateau.grille[coordonnee.getPositionX()][coordonnee.getPositionY()].estLibre();
 	}
 	
 	//jvois pas à quoi ça sert
@@ -49,7 +51,7 @@ public class Vue {
 	
 	//si le int de estBase() correspond à son équipe il est à la base 
 	public boolean estBase(Robot robot){
-		return plateau[robot.getCoordonnee().getPositionX()][robot.getCoordonnee().getPositionY()].estBase()==robot.getEquipe();
+		return Plateau.grille[robot.getCoordonnee().getPositionX()][robot.getCoordonnee().getPositionY()].estBase()==robot.getEquipe();
 	}
 	
 	//savoir si il est vivant ?
