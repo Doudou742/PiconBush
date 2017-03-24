@@ -16,14 +16,15 @@ public class Deplacement extends Action {
 					objectif.deplaceSur(super.getRobot());
 					Plateau.grille[tmp.getPositionX()][tmp.getPositionY()].videCase();
 					super.getRobot().subitDegat();
+					super.getRobot().setEnergie(super.getRobot().getEnergie()-Constantes.getCoutDeplacementTank());
 				}else {
 					Coord tmp = super.getRobot().getCoordonnee();
 					objectif.deplaceSur(super.getRobot());
 					Plateau.grille[tmp.getPositionX()][tmp.getPositionY()].videCase();
+					super.getRobot().setEnergie(super.getRobot().getEnergie()-Constantes.getCoutDeplacementTank());
 				}
 				
 			}
-			// deplacement de 2
 
 		} else if (super.getRobot() instanceof Tireur || super.getRobot() instanceof Piegeur) {
 			// deplacement de 1
@@ -34,10 +35,20 @@ public class Deplacement extends Action {
 						objectif.deplaceSur(super.getRobot());
 						Plateau.grille[tmp.getPositionX()][tmp.getPositionY()].videCase();
 						super.getRobot().subitDegat();
+						if(super.getRobot() instanceof Tireur){
+							super.getRobot().setEnergie(super.getRobot().getEnergie()-Constantes.getCoutDeplacementTireur());
+						}else {
+							super.getRobot().setEnergie(super.getRobot().getEnergie()-Constantes.getCoutDeplacementPiegeur());
+						}
 					} else {
 						Coord tmp = super.getRobot().getCoordonnee();
 						objectif.deplaceSur(super.getRobot());
 						Plateau.grille[tmp.getPositionX()][tmp.getPositionY()].videCase();
+						if(super.getRobot() instanceof Tireur){
+							super.getRobot().setEnergie(super.getRobot().getEnergie()-Constantes.getCoutDeplacementTireur());
+						}else {
+							super.getRobot().setEnergie(super.getRobot().getEnergie()-Constantes.getCoutDeplacementPiegeur());
+						}
 					}
 				}
 
