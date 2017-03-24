@@ -1,4 +1,4 @@
-
+package personnages;
 
 public class Coord {
 	 private int positionX;
@@ -29,10 +29,9 @@ public class Coord {
 	        
 	        this.positionY = y;
 	    }
-	    public void ajouterCoord(Coord coordonnee){
-	    	this.positionX+=coordonnee.positionX;
-	    	this.positionY+=coordonnee.positionY;
+	    public Coord ajouterCoord(Coord coordonnee){
 	    
+	    	return new Coord(this.positionX+coordonnee.positionX,this.positionY+coordonnee.positionY);
 	    }
 	    
 	    public boolean equals(Coord coordonnee){
@@ -40,10 +39,6 @@ public class Coord {
 	    		return true;
 	    	}
 	    	return false;
-	    }
-	    
-	    public Coord getCoord(){
-	    	return new Coord(this.positionX,this.positionY);
 	    }
 	    
 

@@ -1,5 +1,7 @@
 package personnages;
 
+import plateau.Plateau;
+
 public class Deplacement extends Action {
 
 	public Deplacement(Robot robot, Cellule objectif) {
@@ -12,7 +14,7 @@ public class Deplacement extends Action {
 
 		} else if (super.getRobot() instanceof Tireur || super.getRobot() instanceof Piegeur) {
 			// deplacement de 1
-			if (objectif.estLibre()) {
+			if (objectif.estLibre() && peutYAller()) {
 				if (!objectif.contiensObstacle() && objectif.celluleValide()) {
 					if (objectif.contiensMine()) {
 						Coord tmp = super.getRobot().getCoordonnee();
@@ -30,10 +32,28 @@ public class Deplacement extends Action {
 		}
 	}
 
-	public boolean peutBouger() {
-		Coord tmp=super.getRobot().getCoordonnee();
-		if(tmp.ajouterCoord(Constantes.haut))
+	public boolean peutYAller() {
+		if(super.getRobot().getCoordonnee().ajouterCoord(Constantes.haut).equals(super.getObjectif().getCoordCell())){
+			return true;
+		}else if(super.getRobot().getCoordonnee().ajouterCoord(Constantes.bas).equals(super.getObjectif().getCoordCell())){
+			return true;
+		}else if(super.getRobot().getCoordonnee().ajouterCoord(Constantes.droite).equals(super.getObjectif().getCoordCell())){
+			return true;
+		} else if(super.getRobot().getCoordonnee().ajouterCoord(Constantes.gauche).equals(super.getObjectif().getCoordCell())){
+			return true;
+		}else if(super.getRobot().getCoordonnee().ajouterCoord(Constantes.diagoBasDroite).equals(super.getObjectif().getCoordCell())){
+			return true;
+		}else if(super.getRobot().getCoordonnee().ajouterCoord(Constantes.diagoBasGauche).equals(super.getObjectif().getCoordCell())){
+			return true;
+		}else if(super.getRobot().getCoordonnee().ajouterCoord(Constantes.diagoHautDroite).equals(super.getObjectif().getCoordCell())){
+			return true;
+		}else if(super.getRobot().getCoordonnee().ajouterCoord(Constantes.diagoHautGauche).equals(super.getObjectif().getCoordCell())){
+			return true;
+		}else {
+			return false;
+		}
 	}
+	
 
 	@Override
 	public void agit() {
