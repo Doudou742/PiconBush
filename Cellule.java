@@ -44,6 +44,19 @@ public abstract class Cellule {
 	public Robot getUnRobot() {
 		return unRobot;
 	}
+	
+
+	public void setUnRobot(Robot unRobot) {
+		this.unRobot = unRobot;
+	}
+	
+	public boolean estLibre(){
+		if(mine==0 && base==0 && unRobot==null && !obstacle){
+			return true;
+		}else {
+			return false;
+		}
+	}
 
 	abstract void deplaceSur(Robot unRobot);
 	abstract void ajoute(int equipe);
