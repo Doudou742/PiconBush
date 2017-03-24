@@ -18,7 +18,6 @@ import java.util.Scanner;
 	}
 	
 	public void changeMessageInt(String message){
-
 		this.message = message;
 	}
 	
