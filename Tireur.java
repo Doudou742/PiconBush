@@ -1,21 +1,18 @@
 package personnages;
 
+import java.util.List;
 
 public class Tireur extends Robot {
 
-	private static int deplacement;
-	private static int coutAction;
-	private static int coutDep;
-	private static int degat;
+	private static int deplacement = 1;
+	private static int coutAction = -2;
+	private static int coutDep = -1;
+	private static int degat = -3;
 	private static String type = "Tireur";
 
-	public Tireur(Vue vue, int equipe, int x, int y) {
+	public Tireur(Vue vue, int energie, int equipe, int x, int y) {
 		super(vue, x, y, equipe);
-		super.setEnergie(40);
-		deplacement=Constantes.getDeplacementTireur();
-		coutAction=Constantes.getCoutTirTireur();
-		coutDep=Constantes.getCoutDeplacementTireur();
-		degat=Constantes.getDegatsTireur();
+		super.setEnergie(energie);
 	}
 
 	public int getDeplacement() {
@@ -62,11 +59,37 @@ public class Tireur extends Robot {
 			return "   ";
 		}
 	}
+	
+	public boolean tirer(Cellule cellule) {
+		if (cellule.estLibre()){
+			return false;
+		}
+		
+		else if (cellule.getUnRobot() != null) {
+			if (cellule.getUnRobot().getEquipe() == this.getEquipe()) {
+				return false;
+			}
+			else {
+				super.setEnergie(super.getEnergie() - coutAction);
+				cellule.getUnRobot().setEnergie(cellule.getUnRobot().getEnergie() - this.degat);
+				return true;
+			}
+		}
+		return false;
+		
+		
+	}
 
 	@Override
-	public boolean cibleVide(Cellule cellule) {
+	public List<Coord> getDeplacements() {
 		// TODO Auto-generated method stub
-		return cellule.estLibre();
+		return null;
+	}
+
+	@Override
+	public boolean cibeVide(Cellule cellule) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
