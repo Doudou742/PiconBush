@@ -10,9 +10,9 @@ public class Tireur extends Robot {
 	private static int degat = -3;
 	private static String type = "Tireur";
 
-	public Tireur(Vue vue, int energie, int equipe, int x, int y) {
+	public Tireur(Vue vue, int equipe, int x, int y) {
 		super(vue, x, y, equipe);
-		super.setEnergie(energie);
+		super.setEnergie(Constantes.getEnergieTireur());
 	}
 
 	public int getDeplacement() {
@@ -81,15 +81,10 @@ public class Tireur extends Robot {
 	}
 
 	@Override
-	public List<Coord> getDeplacements() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean cibeVide(Cellule cellule) {
+	public boolean cibleVide(Cellule cellule) {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
 
 }

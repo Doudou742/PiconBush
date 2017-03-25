@@ -18,6 +18,17 @@ public abstract class Cellule {
 		
 	}
 	
+	public void addBase(Base base){
+		this.base=base.getEquipe();
+	}
+	
+	public void addRobot(Robot robot){
+		unRobot=robot;
+	}
+	
+	public void addMine(int mine){
+		this.mine=mine;
+	}
 	public boolean contiensMine(){
 		return mine!=0;
 	}
@@ -78,7 +89,9 @@ public abstract class Cellule {
 		}
 		else if(obstacle){
 			return "O";
-		}else if(base!=0){
+		}else if(base==1){
+			return "b";
+		}else if(base==2){
 			return "B";
 		}
 		return " ";
