@@ -1,6 +1,5 @@
 package personnages;
 
-import plateau.Plateau;
 
 public abstract class Cellule {
 	
