@@ -1,6 +1,5 @@
 package personnages;
 
-import plateau.Plateau;
 
 public class Vue {
 
@@ -28,7 +27,7 @@ public class Vue {
 		Plateau.grille[robot.getCoordonnee().getPositionX()][robot.getCoordonnee().getPositionY()].videCase();
 	}
 	
-	//jvois pas à quoi ça sert  
+	//jvois pas Ã  quoi Ã§a sert  
 	public void ajoute(Coord coordonnee,int equipe){ 
 		
 	}
@@ -44,12 +43,12 @@ public class Vue {
 		return Plateau.grille[coordonnee.getPositionX()][coordonnee.getPositionY()].estLibre();
 	}
 	
-	//jvois pas à quoi ça sert
+	//jvois pas Ã  quoi Ã§a sert
 	public int getContenu(Coord coordonnee){
 		return -1;
 	}
 	
-	//si le int de estBase() correspond à son équipe il est à la base 
+	//si le int de estBase() correspond Ã  son Ã©quipe il est Ã  la base 
 	public boolean estBase(Robot robot){
 		return Plateau.grille[robot.getCoordonnee().getPositionX()][robot.getCoordonnee().getPositionY()].estBase()==robot.getEquipe();
 	}
