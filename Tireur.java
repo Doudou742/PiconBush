@@ -70,7 +70,7 @@ public class Tireur extends Robot {
 				return false;
 			}
 			else {
-				super.setEnergie(super.getEnergie() - coutAction);
+				super.setEnergie(super.getEnergie() + coutAction);
 				cellule.getUnRobot().setEnergie(cellule.getUnRobot().getEnergie() - this.degat);
 				return true;
 			}

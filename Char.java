@@ -18,6 +18,26 @@ public class Char extends Robot {
 		coutDep=Constantes.getCoutDeplacementTank();
 		degat=Constantes.getDegatsTank();
 	}
+	
+	public boolean tirer(Cellule cellule) {
+		if (cellule.estLibre()){
+			return false;
+		}
+		
+		else if (cellule.getUnRobot() != null) {
+			if (cellule.getUnRobot().getEquipe() == this.getEquipe()) {
+				return false;
+			}
+			else {
+				super.setEnergie(super.getEnergie() + coutAction);
+				cellule.getUnRobot().setEnergie(cellule.getUnRobot().getEnergie() - this.degat);
+				return true;
+			}
+		}
+		return false;
+		
+		
+	}
 
 	@Override
 	public boolean peutTirer() {
