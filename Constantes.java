@@ -41,7 +41,7 @@ public class Constantes {
 	private static final int ENERGIE_TIREUR = 40;
 	private static final int ENERGIE_PIEGEUR = 50;
 	
-	//déplacement
+	//dÃ©placement
 	
 	public final static Coord haut=new Coord(0,-1);;
 	public final static Coord bas=new Coord(0,1); 
@@ -51,6 +51,11 @@ public class Constantes {
 	public final static Coord diagoHautGauche=new Coord(-1,-1);
 	public final static Coord diagoBasGauche=new Coord(1,-1);
 	public final static Coord diagoHautDroite=new Coord(-1,1);
+	
+	public final static Coord hautChar = new Coord(0,-2);
+	public final static Coord basChar = new Coord(0,2);
+	public final static Coord gaucheChar = new Coord(-2,0);
+	public final static Coord droiteChar = new Coord(2,0);
 	
 	// RECHARGE ROBOT DANS UNE BASE
 	

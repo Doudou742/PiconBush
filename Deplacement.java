@@ -1,6 +1,5 @@
 package personnages;
 
-import plateau.Plateau;
 
 public class Deplacement extends Action {
 
@@ -85,28 +84,34 @@ public class Deplacement extends Action {
 		}
 	}
 
-	public boolean peutYAllerChar() { //
+	public boolean peutYAllerChar() { 
 		if (!objectif.contiensObstacle()) {
-			if (super.getRobot().getCoordonnee().ajouterCoord(Constantes.hautTank)
+			if (super.getRobot().getCoordonnee().ajouterCoord(Constantes.hautChar)
 					.equals(super.getObjectif().getCoordCell())) {
 				return true;
-			} else if (super.getRobot().getCoordonnee().ajouterCoord(Constantes.basTank)
+			} else if (super.getRobot().getCoordonnee().ajouterCoord(Constantes.basChar)
 					.equals(super.getObjectif().getCoordCell())) {
 				return true;
-			} else if (super.getRobot().getCoordonnee().ajouterCoord(Constantes.droiteTank)
+			} else if (super.getRobot().getCoordonnee().ajouterCoord(Constantes.droiteChar)
 					.equals(super.getObjectif().getCoordCell())) {
 				return true;
-			} else if (super.getRobot().getCoordonnee().ajouterCoord(Constantes.gaucheTank)
+			} else if (super.getRobot().getCoordonnee().ajouterCoord(Constantes.gaucheChar)
 					.equals(super.getObjectif().getCoordCell())) {
 				return true;
 			}
 		}else if(objectif.contiensObstacle()) { 
-			// a faire le déplacement de 1 
+			// a faire le dÃ©placement de 1 	
 		}
 		
 		return false;
 
 	}
 
+	@Override
+	public void agit() {
+		
+		// deplacement du coup...
+
+	}
 
 }
