@@ -30,7 +30,7 @@ public class Char extends Robot {
 			}
 			else {
 				super.setEnergie(super.getEnergie() + coutAction);
-				cellule.getUnRobot().setEnergie(cellule.getUnRobot().getEnergie() - this.degat);
+				cellule.getUnRobot().setEnergie(cellule.getUnRobot().getEnergie() + this.degat);
 				return true;
 			}
 		}
