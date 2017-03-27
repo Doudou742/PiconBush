@@ -1,5 +1,7 @@
 package personnages;
 
+import java.util.List;
+
 public class Char extends Robot {
 	private static int deplacement;
 	private static int coutAction;
@@ -7,7 +9,7 @@ public class Char extends Robot {
 	private static int degat ;
 	private static String type = "Char";
 
-	public Char(Vue vue, int x, int y, int equipe) {
+	public Char(Vue vue,int equipe, int x, int y) {
 		super(vue, x, y, equipe);
 		// TODO Auto-generated constructor stub
 		super.setEnergie(Constantes.getEnergieTank());
@@ -50,22 +52,28 @@ public class Char extends Robot {
 	}
 
 	@Override
-	public boolean cibleVide(Cellule cellule) {
+	public List<Coord> getDeplacements() {
 		// TODO Auto-generated method stub
-		return cellule.estLibre();
+		return null;
 	}
-	
-	
+
 	@Override
-	public String toString(){
-		if(super.getEquipe()==1){
-			return " c ";
-		} else if(super.getEquipe()==2){
-			return " C ";
-		}else{
-			return "   ";
-		}
+	public boolean cibeVide(Cellule cellule) {
+		// TODO Auto-generated method stub
+		return false;
 	}
+	
+	public String toString(){
+		if(super.getEquipe() == 1){
+			return "c";
+		}
+		if(super.getEquipe() == 2){
+			return "C";
+		}
+		return "error";
+	}
+	
+	
 	
 
 }

@@ -2,8 +2,6 @@ package personnages;
 
 import java.util.List;
 
-import plateau.Plateau;
-
 abstract public class Robot {
 
 	private int energie;
@@ -17,7 +15,6 @@ abstract public class Robot {
 		this.vue=vue;
 		coordonnee=new Coord(x,y);
 		this.equipe=equipe;
-		
 	}
 	
 	abstract public boolean peutTirer();
@@ -41,7 +38,7 @@ abstract public class Robot {
 	}
 
 	public int getEquipe() {
-		return equipe;
+		return this.equipe;
 	}
 
 	public Vue getVue() {
@@ -64,7 +61,9 @@ abstract public class Robot {
 	abstract public int getCoutDep();
 	abstract public int getDegat();
 	abstract public String getType();
-	abstract public boolean cibleVide(Cellule cellule);
+	abstract public List<Coord> getDeplacements();
+	abstract public boolean cibeVide(Cellule cellule);
+	abstract public String toString();
 	
 
 	public void subitDegat(){
@@ -76,8 +75,6 @@ abstract public class Robot {
 			energie-=3;
 		}
 	}
-	abstract public String toString();
-	
 	
 
 }

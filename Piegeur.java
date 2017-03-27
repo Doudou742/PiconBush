@@ -9,13 +9,13 @@ public class Piegeur extends Robot{
 	private static int degat = -2;
 	private static String type = "Piegeur";
 	
-	public Piegeur(Vue vue, int abscisse, int ordonnee, int equipe) {
+	public Piegeur(Vue vue,int equipe,int abscisse, int ordonnee) {
 		super(vue, abscisse, ordonnee, equipe);
 		super.setEnergie(50);
 	}
 	
 	public boolean peutTirer(){
-		return super.getEnergie() >= coutAction;
+		return super.getEnergie() > coutAction;
 	}
 	
 	
@@ -44,27 +44,26 @@ public class Piegeur extends Robot{
 		return this.type;
 	}
 
-	
 
 	@Override
-	public boolean cibleVide(Cellule cellule) {
+	public List<Coord> getDeplacements() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean cibeVide(Cellule cellule) {
 		return cellule.estLibre();
 	}
 	
-	@Override
 	public String toString(){
+		
 		if(super.getEquipe()==1){
-			return " p ";
+			return "p";
 		} else if(super.getEquipe()==2){
-			return " P ";
+			return "P";
 		}else{
-			return "   ";
+			return "ERROR";
 		}
 	}
-	
-
-	
-
-	
-	
 }
