@@ -18,8 +18,13 @@ public class Plateau {
 		grille = new Cellule[larg][haut];
 		this.largeur = larg;
 		this.hauteur = haut;
-		this.percentObst = (obst <= 50) ? obst : 50; // condition sur une ligne
+		if (obst > 50) {
+			this.percentObst = obst;
+		} else {
+			percentObst = obst;
+		}
 		initGrille();
+		placeObstacle();
 	}
 
 	public void initObstacle() {
@@ -29,91 +34,16 @@ public class Plateau {
 		}
 	}
 
-	public void placeObstacle(int pourcentage) {
+	public void placeObstacle() {
 		for (int ligne = 0; ligne < grille.length; ligne++) {
 			for (int colonne = 0; colonne < grille[0].length; colonne++) {
 				Random random = new Random();
-				if (random.nextDouble() * 100 < pourcentage) {
+				if (random.nextDouble() * 100 < percentObst) {
 					grille[ligne][colonne].addObstacle();
 				}
 			}
 		}
 
-	}
-
-	public void placementObstacle() {
-		this.placeObstacle(percentObst);
-		while (!this.bonPlacement()) {
-			this.placeObstacle(percentObst);
-		}
-	}
-
-	private boolean bonPlacement() {
-		for (int i = 0; i < grille.length - 1; i++) {
-			for (int j = 0; j < grille[0].length - 1; j++) {
-				if (i == 0 && j == 0) {
-					if (!grille[i + 1][j].estLibre() || !grille[i][j + 1].estLibre()) { // autour
-																						// dla
-																						// base
-																						// en
-																						// haut
-																						// a
-																						// gauche
-						return false;
-					}
-				} else if (i == grille.length && j == grille[0].length) {
-					if (!grille[i - 1][j].estLibre() || !grille[i][j - 1].estLibre()) { // autour
-																						// dla
-																						// base
-																						// en
-																						// bas
-																						// a
-																						// droite
-						return false;
-					}
-				} else if (i == 0) {
-					if (j == 9 && (!grille[i + 1][j].estLibre() || !grille[i][j - 1].estLibre())) { // coin
-																									// en
-																									// haut
-																									// a
-																									// droite
-						return false;
-
-					} else if (!grille[i][j - 1].estLibre() || !grille[i][j + 1].estLibre()
-							|| !grille[i + 1][j].estLibre()) { // premiere ligne
-						return false;
-					} else if (j == 0) {
-						if (j == 9 && (!grille[i - 1][j].estLibre() || !grille[i][j + 1].estLibre())) { // coin
-																										// en
-																										// bas
-																										// a
-																										// gauche
-							return false;
-						} else if (!grille[i + 1][j].estLibre() || !grille[i][j + 1].estLibre()
-								|| !grille[i - 1][j].estLibre()) { // premiere
-																	// colonne
-							return false;
-						}
-					} else if (i == grille[0].length) { // derniere ligne
-						if (!grille[i][j - 1].estLibre() || !grille[i][j + 1].estLibre()
-								|| !grille[i - 1][j].estLibre()) {
-							return false;
-						}
-					} else if (j == grille[0].length) { // derniere colonne
-						if (!grille[i + 1][j].estLibre() || !grille[i][j - 1].estLibre()
-								|| !grille[i - 1][j].estLibre()) {
-							return false;
-						}
-					} else if (!grille[i][j].estLibre()) {
-						if (!grille[i + 1][j].estLibre() || !grille[i - 1][j].estLibre() || !grille[i][j + 1].estLibre()
-								|| !grille[i][j - 1].estLibre()) {
-							return false;
-						}
-					}
-				}
-			}
-		}
-		return true;
 	}
 
 	public int getLargeur() {
@@ -185,25 +115,24 @@ public class Plateau {
 		System.out.println(res);
 	}
 
-	
-	  public void addMine(Coord coord,int mine) {
-	  grille[coord.getPositionX()][coord.getPositionY()].addMine(mine);
-	  }
-	 
+	public void addMine(Coord coord, int mine) {
+		grille[coord.getPositionX()][coord.getPositionY()].addMine(mine);
+	}
 
 	public void addBase(Base b) {
 		if (b.getCoordCell().getPositionX() < grille.length && b.getCoordCell().getPositionY() < grille[0].length) {
 			grille[b.getCoordCell().getPositionX()][b.getCoordCell().getPositionY()].addBase(b);
 		}
 	}
+
 	/*
 	 * public void addTank(Coord coord) {
 	 * grille[coord.getPositionX()][coord.getPositionY()].tank; }
-	 */ 
-	 public void addRobot(Robot robot) {
-	  grille[robot.getCoordonnee().getPositionX()][robot.getCoordonnee().getPositionY()].addRobot(robot);
-			   }
-	 /* 
+	 */
+	public void addRobot(Robot robot) {
+		grille[robot.getCoordonnee().getPositionX()][robot.getCoordonnee().getPositionY()].setUnRobot(robot);
+	}
+	/*
 	 * public void addPiegeur(Coord coord) {
 	 * grille[coord.getPositionX()][coord.getPositionY()].piegeur; }
 	 */
