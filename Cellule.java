@@ -1,5 +1,6 @@
 package personnages;
 
+import plateau.Plateau;
 
 public abstract class Cellule {
 	
@@ -22,7 +23,7 @@ public abstract class Cellule {
 	}
 	
 	public void addRobot(Robot robot){
-		unRobot=robot;
+		this.deplaceSur(robot);
 	}
 	
 	public void addMine(int mine){
@@ -70,6 +71,9 @@ public abstract class Cellule {
 
 
 	public boolean celluleValide(){
+		if(this.estBase()!=0){
+			return false;
+		}
 		if(this.uneCoord.getPositionX()<Plateau.grille.length && this.uneCoord.getPositionY()<Plateau.grille[0].length){
 			return true;
 		}
@@ -83,7 +87,7 @@ public abstract class Cellule {
 		if(mine!=0){
 			return "X";
 		}
-		else if (unRobot !=null){
+		else if (unRobot instanceof Tireur){
 			unRobot.toString();
 		}
 		else if(obstacle){

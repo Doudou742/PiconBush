@@ -1,27 +1,21 @@
+package personnages;
 
-public abstract class Action {
+public class Action {
 
 	private Robot robot;
-	private Coord direction;
-	protected Coord objectif;
+	protected Cellule objectif;
 	
-	public Action (Robot robot, Coord direction) {
+	public Action (Robot robot, Cellule objectif) {
 		this.robot = robot;
-		this.direction = direction;
-	}
+		this.objectif=objectif;
+		}
 	
 	public Robot getRobot() {
 		return this.robot;
 	}
-	
-	public Coord getDirection() {
-		return this.direction;
-	}
-	
-	public Coord getObjectif() {
+	public Cellule getObjectif() {
 		return this.objectif;
 	}
 	
-	public abstract void agit();
 	
 }

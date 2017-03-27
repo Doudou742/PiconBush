@@ -15,7 +15,7 @@ public class Piegeur extends Robot{
 	}
 	
 	public boolean peutTirer(){
-		return super.getEnergie() > coutAction;
+		return super.getEnergie() >= coutAction;
 	}
 	
 	
@@ -44,16 +44,27 @@ public class Piegeur extends Robot{
 		return this.type;
 	}
 
+	
 
 	@Override
-	public List<Coord> getDeplacements() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean cibeVide(Cellule cellule) {
+	public boolean cibleVide(Cellule cellule) {
 		return cellule.estLibre();
 	}
+	
+	@Override
+	public String toString(){
+		if(super.getEquipe()==1){
+			return " p ";
+		} else if(super.getEquipe()==2){
+			return " P ";
+		}else{
+			return "   ";
+		}
+	}
+	
+
+	
+
+	
 	
 }

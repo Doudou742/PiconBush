@@ -56,7 +56,16 @@ public class Char extends Robot {
 	}
 	
 	
-	
+	@Override
+	public String toString(){
+		if(super.getEquipe()==1){
+			return " c ";
+		} else if(super.getEquipe()==2){
+			return " C ";
+		}else{
+			return "   ";
+		}
+	}
 	
 
 }

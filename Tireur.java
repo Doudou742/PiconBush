@@ -22,7 +22,7 @@ public class Tireur extends Robot {
 	@Override
 	public boolean peutTirer() { // 
 		// TODO Auto-generated method stub
-		if(super.getEnergie()>=-coutAction){
+		if(super.getEnergie()>= -coutAction){
 			return true;
 		}
 		return false;
@@ -49,7 +49,7 @@ public class Tireur extends Robot {
 	public String getType() {
 		return this.type;
 	}
-
+	@Override
 	public String toString(){
 		if(super.getEquipe()==1){
 			return " t ";
@@ -60,25 +60,6 @@ public class Tireur extends Robot {
 		}
 	}
 	
-	public boolean tirer(Cellule cellule) {
-		if (cellule.estLibre()){
-			return false;
-		}
-		
-		else if (cellule.getUnRobot() != null) {
-			if (cellule.getUnRobot().getEquipe() == this.getEquipe()) {
-				return false;
-			}
-			else {
-				super.setEnergie(super.getEnergie() - coutAction);
-				cellule.getUnRobot().setEnergie(cellule.getUnRobot().getEnergie() - this.degat);
-				return true;
-			}
-		}
-		return false;
-		
-		
-	}
 
 	@Override
 	public boolean cibleVide(Cellule cellule) {

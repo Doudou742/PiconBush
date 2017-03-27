@@ -108,9 +108,5 @@ public class Deplacement extends Action {
 
 	}
 
-	@Override
-	public void agit() {
-
-	}
 
 }
