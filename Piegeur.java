@@ -45,11 +45,7 @@ public class Piegeur extends Robot{
 	}
 
 
-	@Override
-	public List<Coord> getDeplacements() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 	@Override
 	public boolean cibeVide(Cellule cellule) {

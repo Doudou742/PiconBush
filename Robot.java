@@ -2,6 +2,8 @@ package personnages;
 
 import java.util.List;
 
+import plateau.Plateau;
+
 abstract public class Robot {
 
 	private int energie;
@@ -61,7 +63,6 @@ abstract public class Robot {
 	abstract public int getCoutDep();
 	abstract public int getDegat();
 	abstract public String getType();
-	abstract public List<Coord> getDeplacements();
 	abstract public boolean cibeVide(Cellule cellule);
 	abstract public String toString();
 	

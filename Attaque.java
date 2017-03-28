@@ -7,6 +7,14 @@ public class Attaque extends Action {
 
 	}
 
+	public void agit() {
+		if (super.getRobot() instanceof Tireur || super.getRobot() instanceof Char) {
+			tirer(super.getObjectif());
+		}else if(super.getRobot() instanceof Piegeur){
+			poserMine(super.getObjectif());
+		}
+		
+	}
 
 	public boolean tirer(Cellule cellule) {
 		if (super.getRobot() instanceof Tireur || super.getRobot() instanceof Char) {
@@ -34,6 +42,7 @@ public class Attaque extends Action {
 				return false;
 			} else if (super.getRobot().peutTirer()) {
 				cellule.addMine(super.getRobot().getEquipe());
+				super.getRobot().setEnergie(super.getRobot().getEnergie()+super.getRobot().getCoutAction());
 				return true;
 			}
 		}

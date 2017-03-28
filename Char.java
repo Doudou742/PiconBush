@@ -71,11 +71,7 @@ public class Char extends Robot {
 		return type;
 	}
 
-	@Override
-	public List<Coord> getDeplacements() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 	@Override
 	public boolean cibeVide(Cellule cellule) {

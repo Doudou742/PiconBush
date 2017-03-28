@@ -1,6 +1,6 @@
 package personnages;
 
-public class Action {
+public abstract class Action {
 
 	private Robot robot;
 	protected Cellule objectif;
@@ -17,5 +17,5 @@ public class Action {
 		return this.objectif;
 	}
 	
-	
+	public abstract void agit();
 }

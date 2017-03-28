@@ -1,5 +1,6 @@
 package personnages;
 
+import plateau.Plateau;
 
 public class Deplacement extends Action {
 
@@ -7,7 +8,7 @@ public class Deplacement extends Action {
 		super(robot, objectif);
 	}
 
-	public void bougerRobot() {
+	public void agit() {
 		if (super.getRobot() instanceof Char) {
 			if(objectif.estLibre() && peutYAllerChar()){
 				if(objectif.contiensMine()){
@@ -107,11 +108,5 @@ public class Deplacement extends Action {
 
 	}
 
-	@Override
-	public void agit() {
-		
-		// deplacement du coup...
-
-	}
 
 }
