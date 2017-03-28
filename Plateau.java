@@ -1,4 +1,4 @@
-package plateau;
+package personnages;
 
 import java.util.Random;
 
@@ -105,6 +105,38 @@ public class Plateau {
 			res += "*\n";
 			for (int j = 0; j < Plateau.grille[0].length; j++) {
 				res += "|" + Plateau.grille[i][j].toString();
+			}
+			res += "|\n";
+		}
+		for (int k = 0; k < Plateau.grille[0].length; k++) {
+			res += "*-";
+		}
+		res += "*";
+		System.out.println(res);
+	}
+	
+	public void afficherParEquipe(int equipe) {
+		String res = "";
+		for (int i = 0; i < Plateau.grille.length; i++) {
+			for (int k = 0; k < Plateau.grille[0].length; k++) {
+				res += "*-";
+			}
+			res += "*\n";
+			for (int j = 0; j < Plateau.grille[0].length; j++) {
+				
+				if( Plateau.grille[i][j].mine != 0){
+					if(equipe == 1 && Plateau.grille[i][j].mine%2 != 0 ){
+						
+						res += "|" + Plateau.grille[i][j].toString();
+					}
+					if(equipe == 2 && Plateau.grille[i][j].mine%2 == 0){
+						
+						res += "|" + Plateau.grille[i][j].toString();
+					}
+				}
+					if(Plateau.grille[i][j].mine == 0){
+				res += "|" + Plateau.grille[i][j].toString();
+					}
 			}
 			res += "|\n";
 		}
