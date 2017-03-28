@@ -42,6 +42,7 @@ public class Attaque extends Action {
 				return false;
 			} else if (super.getRobot().peutTirer()) {
 				cellule.addMine(super.getRobot().getEquipe());
+				//super.getRobot().
 				super.getRobot().setEnergie(super.getRobot().getEnergie()+super.getRobot().getCoutAction());
 				return true;
 			}

@@ -8,6 +8,7 @@ public class Piegeur extends Robot{
 	private static int coutDeplacement = -2;
 	private static int degat = -2;
 	private static String type = "Piegeur";
+	private int nbMine=10;
 	
 	public Piegeur(Vue vue,int equipe,int abscisse, int ordonnee) {
 		super(vue, abscisse, ordonnee, equipe);
@@ -15,10 +16,8 @@ public class Piegeur extends Robot{
 	}
 	
 	public boolean peutTirer(){
-		return super.getEnergie() > coutAction;
+		return super.getEnergie() > coutAction && nbMine>0;
 	}
-	
-	
 	
 	public int getDeplacement() {
 		return deplacement ;
@@ -44,8 +43,8 @@ public class Piegeur extends Robot{
 		return this.type;
 	}
 
-
-
+	
+	
 
 	@Override
 	public boolean cibeVide(Cellule cellule) {

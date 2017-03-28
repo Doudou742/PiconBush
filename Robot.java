@@ -65,7 +65,6 @@ abstract public class Robot {
 	abstract public String getType();
 	abstract public boolean cibeVide(Cellule cellule);
 	abstract public String toString();
-	
 
 	public void subitDegat(){
 		if(this instanceof Char){

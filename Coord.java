@@ -33,7 +33,7 @@ public class Coord {
 	    
 	    	return new Coord(this.positionX+coordonnee.positionX,this.positionY+coordonnee.positionY);
 	    }
-	    
+	 
 	    public boolean equals(Coord coordonnee){
 	    	if(this.positionX==coordonnee.positionX && this.positionY==coordonnee.positionY){
 	    		return true;

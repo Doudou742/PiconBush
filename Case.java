@@ -1,3 +1,4 @@
+package personnages;
 
 public class Case extends Cellule {
 	
@@ -10,7 +11,20 @@ public class Case extends Cellule {
 		
 		this.base = 0;
 		this.mine = 0;
-		this.unRobot = null;
+		this.setUnRobot(null);
+	}
+
+	@Override
+	void deplaceSur(Robot unRobot) {
+		// TODO Auto-generated method stub
+		super.setUnRobot(unRobot);
+		
+	}
+
+	@Override
+	void ajoute(int equipe) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
