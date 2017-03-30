@@ -15,7 +15,7 @@ public class essai {
 		
 		for(int idx = 0; idx < chaine.length(); idx ++){
 			
-			if (chaine.charAt(idx) <= '0' || chaine.charAt(idx) >= '9'){
+			if (chaine.charAt(idx) < '0' || chaine.charAt(idx) > '9'){
 				return false;
 			}
 			return true;
@@ -41,7 +41,7 @@ public class essai {
 		    do {
 			Object largeur = JOptionPane.showInputDialog(null,"Plateau : Largeur ?","Configuration du plateau",JOptionPane.QUESTION_MESSAGE,iconC,null,"10");
 			l = largeur.toString();
-		    } while(l.isEmpty() || ! estInt(l));
+		    } while(l.isEmpty() || !estInt(l));
 		    
 		    do {
 			Object obstacle = JOptionPane.showInputDialog(null,"Obstacles : remplissage % ?","Configuration du plateau",JOptionPane.QUESTION_MESSAGE,iconC,null,"25");
