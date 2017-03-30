@@ -1,19 +1,49 @@
 package personnages;
 
-import plateau.Plateau;
+import java.net.URL;
+
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+
+
 
 public class essai {
 
-		public static void main(String[] args){
+		public static void main(String[] args) throws Exception {
 			
-			Saisie uneSaisie = new Saisie("Hauteur ?");
-			System.out.println("Configuration du plateau de jeu");
-			int hauteur = uneSaisie.SaisieInt();
-			uneSaisie.setMessage("Largeur ?");
-			int largeur = uneSaisie.SaisieInt();
-			uneSaisie.setMessage("% d'obstacles ?");
-			int obstacle = uneSaisie.SaisieInt();
-			Plateau unPlateau = new Plateau(hauteur,largeur,obstacle);
+			final ImageIcon iconS = new ImageIcon(new URL("http://files.softicons.com/download/toolbar-icons/mono-general-icons-by-custom-icon-design/png/256x256/success.png"));
+		    final ImageIcon iconC = new ImageIcon(new URL("https://image.flaticon.com/icons/png/128/44/44520.png"));
+		    String h;
+		    String l;
+		    String o;
+		   
+		    do {	
+		    	
+			Object hauteur = JOptionPane.showInputDialog(null,"Plateau : Hauteur ?","Configuration du plateau",JOptionPane.QUESTION_MESSAGE,iconC,null,"10");
+			 h = hauteur.toString();
+	
+		    } while(h.isEmpty());
+		    
+		    do {
+			Object largeur = JOptionPane.showInputDialog(null,"Plateau : Largeur ?","Configuration du plateau",JOptionPane.QUESTION_MESSAGE,iconC,null,"10");
+			l = largeur.toString();
+		    } while(l.isEmpty());
+		    
+		    do {
+			Object obstacle = JOptionPane.showInputDialog(null,"Obstacles : remplissage % ?","Configuration du plateau",JOptionPane.QUESTION_MESSAGE,iconC,null,"25");
+			o = obstacle.toString();
+			
+			if(o.contains("beaufils")){
+				o = "42";
+			}
+			
+		    } while(o.isEmpty() || o.contains("x"));
+			 
+			
+			
+			Plateau unPlateau = new Plateau(Integer.valueOf(h),Integer.valueOf(l),Integer.valueOf(o));
+			JOptionPane.showMessageDialog(null, "Le plateau a été configurer avec succès ! \n----------- Place au jeu -----------","Configuration du plateau",JOptionPane.INFORMATION_MESSAGE,iconS);
 			
 			Base baseA = new Base(0,0,1);
 			Base baseB = new Base(unPlateau.getHauteur() -1,unPlateau.getLargeur() -1,2);
@@ -27,7 +57,6 @@ public class essai {
 			Tireur test = new Tireur(equipeA,1,2,5);
 			Char testChar = new Char(equipeB,2,2,6);
 			Piegeur testP = new Piegeur(equipeA,1,2,7);
-			
 			unPlateau.addRobot(test);
 			unPlateau.addRobot(testChar);
 			unPlateau.addRobot(testP);
@@ -53,12 +82,20 @@ public class essai {
 			Action poser = new Attaque(testP,unPlateau.grille[3][7]);
 			// System.out.println(equipeA.getContenu(new Coord(5,5)));
 			Action bouge= new Deplacement(testP,unPlateau.grille[2][8]);
+			
+			Action caca = new Deplacement(test,unPlateau.grille[2][4]);
+			
+			caca.agit();
 			poser.agit();
 			bouge.agit();
 			System.out.println(testP.getEnergie());
-			unPlateau.afficher();
+			System.out.println("Equipe 1:");
+			unPlateau.afficherParEquipe(1);
+			System.out.println("Equipe 2:");
+			unPlateau.afficherParEquipe(2);
 			/*equipeA.poserRobot(testChar, new Coord(6,6));
 			unPlateau.afficher();
 		*/
+			
 		}
 }
