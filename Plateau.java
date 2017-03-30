@@ -26,6 +26,10 @@ public class Plateau {
 		initGrille();
 		placeObstacle();
 	}
+	
+	public Cellule getCellule(Coord coord) {
+		return Plateau.grille[coord.getPositionX()][coord.getPositionY()];
+	}
 
 	public void initObstacle() {
 		int nb_cases = this.hauteur * this.largeur;
@@ -172,19 +176,19 @@ public class Plateau {
 	 */
 
 	public void afficheEnergie() {
-		String equipe1="Voici les robots de l'équipe 1 avec leur énergie et leurs coordonnées : \n";
-		String equipe2="Voici les robots de l'équipe 2 avec leur énergie et leurs coordonnées : \n";
+		String equipe1="Voici les robots de l'Ã©quipe 1 avec leur Ã©nergie et leurs coordonnÃ©es : \n";
+		String equipe2="Voici les robots de l'Ã©quipe 2 avec leur Ã©nergie et leurs coordonnÃ©es : \n";
 		for (int i = 0; i < grille.length; i++) {
 			for (int j = 0; j < grille[0].length; j++) {
 				if (grille[i][j].contienRobot()) {
 					if(grille[i][j].getUnRobot().getEquipe()==1){
-						equipe1+="Le " + grille[i][j].getUnRobot().getType() + " de l'équipe "
+						equipe1+="Le " + grille[i][j].getUnRobot().getType() + " de l'Ã©quipe "
 								+ grille[i][j].getUnRobot().getEquipe() + " en [" + i + "," + j + "] a "
-								+ grille[i][j].getUnRobot().getEnergie() + " d'énergie \n";
+								+ grille[i][j].getUnRobot().getEnergie() + " d'Ã©nergie \n";
 					}else {
-						equipe2+="Le " + grille[i][j].getUnRobot().getType() + " de l'équipe "
+						equipe2+="Le " + grille[i][j].getUnRobot().getType() + " de l'Ã©quipe "
 								+ grille[i][j].getUnRobot().getEquipe() + " en [" + i + "," + j + "] a "
-								+ grille[i][j].getUnRobot().getEnergie() + " d'énergie \n";
+								+ grille[i][j].getUnRobot().getEnergie() + " d'Ã©nergie \n";
 					}
 				}
 			}
