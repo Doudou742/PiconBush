@@ -1,6 +1,5 @@
 package plateau;
 
-
 import java.util.Random;
 
 import personnages.Base;
@@ -39,7 +38,8 @@ public class Plateau {
 		for (int ligne = 0; ligne < grille.length; ligne++) {
 			for (int colonne = 0; colonne < grille[0].length; colonne++) {
 				Random random = new Random();
-				if (random.nextDouble() * 100 < percentObst && ((ligne!=0 && colonne!=0)|| (ligne!=grille.length-1 && colonne!=grille[0].length-1))) {
+				if (random.nextDouble() * 100 < percentObst && ((ligne != 0 && colonne != 0)
+						|| (ligne != grille.length - 1 && colonne != grille[0].length - 1))) {
 					grille[ligne][colonne].addObstacle();
 				}
 			}
@@ -115,7 +115,7 @@ public class Plateau {
 		res += "*";
 		System.out.println(res);
 	}
-	
+
 	public void afficherParEquipe(int equipe) {
 		String res = "";
 		for (int i = 0; i < Plateau.grille.length; i++) {
@@ -124,28 +124,29 @@ public class Plateau {
 			}
 			res += "*\n";
 			for (int j = 0; j < Plateau.grille[0].length; j++) {
-				
-				if( Plateau.grille[i][j].getMine() != 0){
-					if(equipe == 1 && Plateau.grille[i][j].getMine()%2 != 0 ){
-						
+
+				if (Plateau.grille[i][j].getMine() != 0) {
+					if (equipe == 1 && Plateau.grille[i][j].getMine() % 2 != 0) {
+
 						res += "|" + Plateau.grille[i][j].toString();
 					}
-					if(equipe == 2 && Plateau.grille[i][j].getMine()%2 == 0){
-						
+					if (equipe == 2 && Plateau.grille[i][j].getMine() % 2 == 0) {
+
 						res += "|" + Plateau.grille[i][j].toString();
 					}
 				}
-					if(Plateau.grille[i][j].getMine()== 0){
-				res += "|" + Plateau.grille[i][j].toString();
-					}
+				if (Plateau.grille[i][j].getMine() == 0) {
+					res += "|" + Plateau.grille[i][j].toString();
+				}
 			}
-			res += "|\n";
+			res += "| \n";
 		}
 		for (int k = 0; k < Plateau.grille[0].length; k++) {
 			res += "*-";
 		}
 		res += "*";
-		System.out.println(res);
+		System.out.println(res+"\n");
+		
 	}
 
 	public void addMine(Coord coord, int mine) {
@@ -169,5 +170,27 @@ public class Plateau {
 	 * public void addPiegeur(Coord coord) {
 	 * grille[coord.getPositionX()][coord.getPositionY()].piegeur; }
 	 */
+
+	public void afficheEnergie() {
+		String equipe1="Voici les robots de l'équipe 1 avec leur énergie et leurs coordonnées : \n";
+		String equipe2="Voici les robots de l'équipe 2 avec leur énergie et leurs coordonnées : \n";
+		for (int i = 0; i < grille.length; i++) {
+			for (int j = 0; j < grille[0].length; j++) {
+				if (grille[i][j].contienRobot()) {
+					if(grille[i][j].getUnRobot().getEquipe()==1){
+						equipe1+="Le " + grille[i][j].getUnRobot().getType() + " de l'équipe "
+								+ grille[i][j].getUnRobot().getEquipe() + " en [" + i + "," + j + "] a "
+								+ grille[i][j].getUnRobot().getEnergie() + " d'énergie \n";
+					}else {
+						equipe2+="Le " + grille[i][j].getUnRobot().getType() + " de l'équipe "
+								+ grille[i][j].getUnRobot().getEquipe() + " en [" + i + "," + j + "] a "
+								+ grille[i][j].getUnRobot().getEnergie() + " d'énergie \n";
+					}
+				}
+			}
+		}
+		System.out.println(equipe1);
+		System.out.println(equipe2);
+	}
 
 }
