@@ -65,8 +65,7 @@ abstract public class Robot {
 	abstract public String getType();
 	abstract public boolean cibeVide(Cellule cellule);
 	abstract public String toString();
-	
-
+	abstract public void regen();
 	public void subitDegat(){
 		if(this instanceof Char){
 			energie-=6;

@@ -90,5 +90,11 @@ public class Tireur extends Robot {
 		}
 	}
 
+	@Override
+	public void regen() {
+		// TODO Auto-generated method stub
+		super.setEnergie(Constantes.getDegatsTireur());
+	}
+
 
 }

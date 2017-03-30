@@ -88,6 +88,12 @@ public class Char extends Robot {
 		}
 		return "error";
 	}
+
+	@Override
+	public void regen() {
+		// TODO Auto-generated method stub
+		super.setEnergie(Constantes.getEnergieTank());
+	}
 	
 	
 	
