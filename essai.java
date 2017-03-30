@@ -8,8 +8,21 @@ import javax.swing.JOptionPane;
 
 
 
+
 public class essai {
 
+	public static boolean estInt(String chaine){
+		
+		for(int idx = 0; idx < chaine.length(); idx ++){
+			
+			if (chaine.charAt(idx) <= '0' || chaine.charAt(idx) >= '9'){
+				return false;
+			}
+			return true;
+		}
+		return false;
+	}
+	
 		public static void main(String[] args) throws Exception {
 			
 			final ImageIcon iconS = new ImageIcon(new URL("http://files.softicons.com/download/toolbar-icons/mono-general-icons-by-custom-icon-design/png/256x256/success.png"));
@@ -23,12 +36,12 @@ public class essai {
 			Object hauteur = JOptionPane.showInputDialog(null,"Plateau : Hauteur ?","Configuration du plateau",JOptionPane.QUESTION_MESSAGE,iconC,null,"10");
 			 h = hauteur.toString();
 	
-		    } while(h.isEmpty());
-		    
+		    } while(h.isEmpty() || !estInt(h));
+		     
 		    do {
 			Object largeur = JOptionPane.showInputDialog(null,"Plateau : Largeur ?","Configuration du plateau",JOptionPane.QUESTION_MESSAGE,iconC,null,"10");
 			l = largeur.toString();
-		    } while(l.isEmpty());
+		    } while(l.isEmpty() || ! estInt(l));
 		    
 		    do {
 			Object obstacle = JOptionPane.showInputDialog(null,"Obstacles : remplissage % ?","Configuration du plateau",JOptionPane.QUESTION_MESSAGE,iconC,null,"25");
@@ -38,7 +51,7 @@ public class essai {
 				o = "42";
 			}
 			
-		    } while(o.isEmpty() || o.contains("x"));
+		    } while(o.isEmpty() || !estInt(o));
 			 
 			
 			
