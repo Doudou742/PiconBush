@@ -1,5 +1,6 @@
 package personnages;
 
+import plateau.Plateau;
 
 public abstract class Cellule {
 	
@@ -32,6 +33,10 @@ public abstract class Cellule {
 		return mine!=0;
 	}
 	
+	public int getMine() {
+		return mine;
+	}
+
 	public int estBase(){
 		return this.base;
 	}

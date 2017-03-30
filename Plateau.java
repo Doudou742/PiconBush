@@ -1,4 +1,5 @@
-package personnages;
+package plateau;
+
 
 import java.util.Random;
 
@@ -38,7 +39,7 @@ public class Plateau {
 		for (int ligne = 0; ligne < grille.length; ligne++) {
 			for (int colonne = 0; colonne < grille[0].length; colonne++) {
 				Random random = new Random();
-				if (random.nextDouble() * 100 < percentObst) {
+				if (random.nextDouble() * 100 < percentObst && ((ligne!=0 && colonne!=0)|| (ligne!=grille.length-1 && colonne!=grille[0].length-1))) {
 					grille[ligne][colonne].addObstacle();
 				}
 			}
@@ -124,17 +125,17 @@ public class Plateau {
 			res += "*\n";
 			for (int j = 0; j < Plateau.grille[0].length; j++) {
 				
-				if( Plateau.grille[i][j].mine != 0){
-					if(equipe == 1 && Plateau.grille[i][j].mine%2 != 0 ){
+				if( Plateau.grille[i][j].getMine() != 0){
+					if(equipe == 1 && Plateau.grille[i][j].getMine()%2 != 0 ){
 						
 						res += "|" + Plateau.grille[i][j].toString();
 					}
-					if(equipe == 2 && Plateau.grille[i][j].mine%2 == 0){
+					if(equipe == 2 && Plateau.grille[i][j].getMine()%2 == 0){
 						
 						res += "|" + Plateau.grille[i][j].toString();
 					}
 				}
-					if(Plateau.grille[i][j].mine == 0){
+					if(Plateau.grille[i][j].getMine()== 0){
 				res += "|" + Plateau.grille[i][j].toString();
 					}
 			}
