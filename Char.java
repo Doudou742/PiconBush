@@ -2,6 +2,8 @@ package personnages;
 
 import java.util.List;
 
+import plateaux.Plateau;
+
 public class Char extends Robot {
 	private static int deplacement;
 	private static int coutAction;
@@ -11,34 +13,135 @@ public class Char extends Robot {
 
 	public Char(Vue vue,int equipe, int x, int y) {
 		super(vue, x, y, equipe);
-		// TODO Auto-generated constructor stub
 		super.setEnergie(Constantes.getEnergieTank());
 		deplacement=Constantes.getDeplacementTank();
 		coutAction=Constantes.getCoutTirTank();
 		coutDep=Constantes.getCoutDeplacementTank();
 		degat=Constantes.getDegatsTank();
 	}
+	/*
+	 * Verifier qu'il n'y ai pas d'obstacle entre les deux (obs, qqun d'autre etc)
+	 */
+//	public boolean tirer(Cellule cellule) {
+//		
+//		// Position (x ou y) de la cible et du char.
+//		int x = this.getCoordonnee().getPositionX(),
+//			y = this.getCoordonnee().getPositionY();
+//		
+//		boolean MmLigne = cellule.getCoordCell().getPositionX() == this.getCoordonnee().getPositionX(),
+//				MmColonne = cellule.getCoordCell().getPositionY() == this.getCoordonnee().getPositionY();
+//		
+//		// Si la cellule est vide on ne peux tirer
+//		if (cellule.estLibre() ||  cellule.getUnRobot() == null   ){
+//			return false;
+//		}
+//		
+//		// Si il y a un robot
+//		else if (cellule.getUnRobot() != null) {
+//			// Si c'est un robot de son equipe on ne peux tirer
+//			if (cellule.getUnRobot().getEquipe() == this.getEquipe()) {
+//				return false;
+//			}
+//			// Si c'est un robot ennemi
+//			else {
+//				// Si il est sur la mm ligne
+//				
+//				// Soit x ou y, soit sur la même ligne soit sur la même colonne.
+//				if(MmLigne){	
+//					// Tant qu'on n'a pas regardé entre les deux.
+//					while(x != cellule.getCoordCell().getPositionX()){
+//							
+//						//Si tireur a gauche (ou au dessus) de cible on incrémente sinon on décrémente.
+//						if(x < cellule.getCoordCell().getPositionX()){
+//							x++;
+//						}else{
+//							x--;
+//						}
+//						// Si il y a qqch entre le tireur et la cible, on quitte.
+//						if(! (Plateau.grille[x][this.getCoordonnee().getPositionY()].estLibre()) ){
+//							return false;
+//						}
+//					}
+//				}
+//					
+//				// if mm colonne
+//				if(MmColonne){
+//					// Tant qu'on est entre le tireur et la cible
+//					while(y != cellule.getCoordCell().getPositionY()){			
+//						
+//						//Si tireur au dessus cible on incrémente sinon on décrémente.
+//						if(y < cellule.getCoordCell().getPositionY()){
+//							y++;
+//						}else{
+//							y--;
+//						}
+//						// Si il y a qqch entre le tireur et la cible, on quitte.
+//						// Récupérer la cellule par une coordonné 
+//						// a refaire 
+//						if(! (Plateau.grille[y][this.getCoordonnee().getPositionX()].estLibre() ) ){
+//							return false;
+//						}
+//					}
+//				
+//				}
+//					
+//				// On modifie l'energie du robot qui tire 
+//				super.setEnergie(super.getEnergie() + coutAction);
+//				// Et du robot qui est touché.
+//				cellule.getUnRobot().setEnergie(cellule.getUnRobot().getEnergie() + this.degat);
+//				return true;
+//			}
+//		}
+//		
+//	}
 	
-	public boolean tirer(Cellule cellule) {
-		if (cellule.estLibre()){
-			return false;
-		}
-		
-		else if (cellule.getUnRobot() != null) {
-			if (cellule.getUnRobot().getEquipe() == this.getEquipe()) {
+	
+	/* Prend en paramètre une direction de la classe Constante.
+	 * haut bas gauche droite
+	 */
+	public boolean tirer(Coord direction){
+		int	energieRetirer; // Sert a ne pas tout écrire sur une ligne plutard 
+		// Coordonnées de la cellule courante de la boucle
+		Coord coordBoucle= new Coord(this.getCoordonnee().getPositionX(), this.getCoordonnee().getPositionY());
+		boolean peutPasTirer, robotEnnemie;
+				
+		// Il tire a 10 cases de distance donc une boucle de 10
+		for(int i = 0 ; i<Constantes.getPorteeTank() ; i++){
+			// On ajoute les coordonnées de la direction et celle de la cellule courante pour ce déplacer vers le haut/bas/gauche/droite.
+			coordBoucle.ajouterCoord(direction);
+			
+			// robotEnnemie = Si il y a un robot ennemie sur la case courante.
+			robotEnnemie = Plateau.grille[coordBoucle.getPositionX()][coordBoucle.getPositionY()].getUnRobot().getEquipe() != this.getEquipe();
+			
+			// On ne peux pas tirer si il y a un obstacle, la case est vide, un robot allié
+			peutPasTirer = 	Plateau.grille[coordBoucle.getPositionX()][coordBoucle.getPositionY()].contiensObstacle() || // Un obstacle
+							( Plateau.grille[coordBoucle.getPositionX()][coordBoucle.getPositionY()].contienRobot() && // Un robot mais ...
+										Plateau.grille[coordBoucle.getPositionX()][coordBoucle.getPositionY()].getUnRobot().getEquipe() == this.getEquipe() ); // ... De notre equipe
+			
+			
+			// max =(a>b)? a:b;
+			// Si il y a un obstacle ou un robot allié
+			if( peutPasTirer ){
 				return false;
-			}
-			else {
+			}else if (robotEnnemie && this.peutTirer()){ // Si c'est un robot ennemie et qu'on a assez d'energie
+				
+				// On modifie l'energie du robot qui tire 
 				super.setEnergie(super.getEnergie() + coutAction);
-				cellule.getUnRobot().setEnergie(cellule.getUnRobot().getEnergie() + this.degat);
-				return true;
+				// Et du robot qui est touché.
+				// La cellule courante, son robot, son energie, qui vaux l'energie son energie moins les degats
+				energieRetirer = Plateau.grille[coordBoucle.getPositionX()][coordBoucle.getPositionY()].getUnRobot().getEnergie() + this.degat;
+				Plateau.grille[coordBoucle.getPositionX()][coordBoucle.getPositionY()].getUnRobot().setEnergie(energieRetirer);
+				return true;				
 			}
+			
+			
 		}
+		// Si jamais on est sorti de la porté et qu'on a tiré sur rien (tt les cases étaient vide) Alors on ne peux pas tirer
 		return false;
 		
-		
 	}
-
+	
+	
 	@Override
 	public boolean peutTirer() {
 		// TODO Auto-generated method stub
@@ -46,7 +149,9 @@ public class Char extends Robot {
 	}
 	
 	
-
+	
+	
+	
 	@Override
 	public int getCoutAction() {
 		// TODO Auto-generated method stub
@@ -88,14 +193,5 @@ public class Char extends Robot {
 		}
 		return "error";
 	}
-
-	@Override
-	public void regen() {
-		// TODO Auto-generated method stub
-		super.setEnergie(Constantes.getEnergieTank());
-	}
-	
-	
-	
 
 }
