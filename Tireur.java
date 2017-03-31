@@ -26,7 +26,6 @@ public class Tireur extends Robot {
 						unRobot = Plateau.getCellule(tmp).getUnRobot();
 						Plateau.getCellule(tmp).getUnRobot().subitDegat(unRobot);
 						this.setEnergie(getEnergie()-getCoutAction());
-						return true;
 					}
 				}
 				else if(Plateau.getCellule(tmp).contienRobot()) {
