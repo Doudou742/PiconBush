@@ -37,7 +37,7 @@ public class Deplacement extends Action {
 			}
 			
 			//permet de verifier la sortie du robot quand il est sur la base en bas a droite
-			else if (super.getRobot().getCoordonnee().getPositionX() == Plateau.grille.length && super.getRobot().getCoordonnee().getPositionY() == Plateau.grille[0].length) {
+			else if (super.getRobot().getCoordonnee().getPositionX() == Plateau.grille.length-1 && super.getRobot().getCoordonnee().getPositionY() == Plateau.grille[0].length-1) {
 				if (super.objectif.getCoordCell().equals(super.getRobot().getCoordonnee().ajouterCoord(Constantes.haut)) || super.objectif.getCoordCell().equals(super.getRobot().getCoordonnee().ajouterCoord(Constantes.gauche)) || super.objectif.getCoordCell().equals(super.getRobot().getCoordonnee().ajouterCoord(Constantes.diagoHautGauche))) {
 					if (Plateau.grille[objectif.getCoordCell().getPositionX()][objectif.getCoordCell().getPositionY()].estLibre()){
 						Plateau.grille[objectif.getCoordCell().getPositionX()][objectif.getCoordCell().getPositionY()].addRobot(super.getRobot());

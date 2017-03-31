@@ -68,7 +68,7 @@ public class Essai {
 			}
 		}
 		else {
-			// String choixEquipe1 = Saisie.queVoulezVousFaire();
+			// String choixEquipe2 = Saisie.queVoulezVousFaire();
 			if (choixEquipe.equals("Sortir un robot de la base")) {
 				robotADeplacerAuDebut = Saisie.choixRobotDebut();
 				// tab 0 = tireur tab 1 = piegeur tab 2 = char
@@ -76,7 +76,7 @@ public class Essai {
 					if (robotADeplacerAuDebut.equals("Tireur") && tableauEquipe1[0] > 0) {
 						tableauEquipe1[0]--;
 
-						Robot tireur = new Tireur(equipe, 2, Plateau.grille.length, Plateau.grille[0].length);
+						Robot tireur = new Tireur(equipe, 2, Plateau.grille.length-1, Plateau.grille[0].length-1);
 						Coord tmp = Saisie.choixCoord();
 						// Robot tireur = new Tireur(equipe, 2,
 						// tmp.getPositionX(), tmp.getPositionY());
@@ -88,7 +88,7 @@ public class Essai {
 					} else if (robotADeplacerAuDebut.equals("Piegeur") && tableauEquipe1[1] > 0) {
 						tableauEquipe1[1]--;
 						Coord tmp = Saisie.choixCoord();
-						Robot piegeur = new Piegeur(equipe, 2, Plateau.grille.length, Plateau.grille[0].length);
+						Robot piegeur = new Piegeur(equipe, 2, Plateau.grille.length-1, Plateau.grille[0].length-1);
 						//Robot piegeur = new Piegeur(equipe, 2, tmp.getPositionX(), tmp.getPositionY());
 						Action deplacement = new Deplacement(piegeur,
 								Plateau.grille[tmp.getPositionX()][tmp.getPositionY()]);
@@ -97,7 +97,7 @@ public class Essai {
 					} else if (robotADeplacerAuDebut.equals("Char") && tableauEquipe1[1] > 0) {
 						tableauEquipe1[2]--;
 						Coord tmp = Saisie.choixCoord();
-						Robot tank = new Char(equipe, 2, Plateau.grille.length, Plateau.grille[0].length);
+						Robot tank = new Char(equipe, 2, Plateau.grille.length-1, Plateau.grille[0].length-1);
 						//Robot tank = new Char(equipe, 2, tmp.getPositionX(), tmp.getPositionY());
 						Action deplacement = new Deplacement(tank,
 								Plateau.grille[tmp.getPositionX()][tmp.getPositionY()]);
