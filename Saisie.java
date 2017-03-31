@@ -19,6 +19,27 @@ public class Saisie {
 		unScanner = new Scanner(System.in);
 
 	}
+	
+	public Coord DeplacerDemande(){
+		
+		ImageIcon iconQ = new ImageIcon("image/iconQ.png");
+		String l;
+		String c;
+		
+		do {
+		Object ligne = JOptionPane.showInputDialog(null, "Ligne? :", "Deplacer un robot",JOptionPane.QUESTION_MESSAGE, iconQ, null, "10");
+		l = ligne.toString();
+		} while(! estInt(l) || Integer.valueOf(l) > Plateau.grille.length);
+		
+		do {
+		Object colonne = JOptionPane.showInputDialog(null, "Colonne? :", "Deplacer un robot",JOptionPane.QUESTION_MESSAGE, iconQ, null, "10");
+		c = colonne.toString();
+		
+		} while(! estInt(c) || Integer.valueOf(c) > Plateau.grille[0].length);
+		
+		return new Coord(Integer.valueOf(l),Integer.valueOf(c));
+		
+	}
 
 	public static String queVoulezVousFaire() {
 		String[] choix = { "Bouger un robot", "Tirer/Poser une mine", "Poser un robot" };
@@ -33,7 +54,7 @@ public class Saisie {
 		jop1 = new JOptionPane();
 		ImageIcon img = new ImageIcon("image/valiant_hearts-0.jpg");
 		jop1.showMessageDialog(null,
-				"Bienvenue sur Virtual War \n Codé par Geoffrey, Louis, Gauthier, Raphaël, Alexandre", "Bienvenue",
+				"Bienvenue sur Virtual War \n CodÃ© par Geoffrey, Louis, Gauthier, RaphaÃ«l, Alexandre", "Bienvenue",
 				JOptionPane.INFORMATION_MESSAGE, img);
 	}
 
@@ -56,12 +77,12 @@ public class Saisie {
 		} while (x > 20 || x < 0 || !estNum(b));
 
 		do {
-				b=jop.showInputDialog(null, "Quel est son ordonnée ?", "Choix Y", JOptionPane.QUESTION_MESSAGE);
+				b=jop.showInputDialog(null, "Quel est son ordonnÃ©e ?", "Choix Y", JOptionPane.QUESTION_MESSAGE);
 				if(estNum(b)){
 					y=Integer.parseInt(b);
 				}
 			if (y > 20 || y < 0) {
-				jop.showMessageDialog(null, "Votre ordonnée n'est pas correcte", "Erreur", JOptionPane.ERROR_MESSAGE);
+				jop.showMessageDialog(null, "Votre ordonnÃ©e n'est pas correcte", "Erreur", JOptionPane.ERROR_MESSAGE);
 
 			}
 		} while (y > 20 || y < 0 || !estNum(b));
@@ -183,7 +204,7 @@ public void configurationJoueur(Vue uneVue, Base uneBase, boolean equipe){
 			} while (nbrobot > max);
 		}
 		
-		JOptionPane.showMessageDialog(null,"Votre armée a été configurer avec succès !","Configuration de l'armée Equipe 1", JOptionPane.INFORMATION_MESSAGE, iconS);
+		JOptionPane.showMessageDialog(null,"Votre armÃ©e a Ã©tÃ© configurer avec succÃ¨s !","Configuration de l'armÃ©e Equipe 1", JOptionPane.INFORMATION_MESSAGE, iconS);
 
 		}
 		else {
@@ -241,7 +262,7 @@ public void configurationJoueur(Vue uneVue, Base uneBase, boolean equipe){
 				} while (nbrobotB > max);
 			}
 			
-			JOptionPane.showMessageDialog(null,"Votre armée a été configurer avec succès !","Configuration de l'armée Equipe 2", JOptionPane.INFORMATION_MESSAGE, iconS);
+			JOptionPane.showMessageDialog(null,"Votre armÃ©e a Ã©tÃ© configurer avec succÃ¨s !","Configuration de l'armÃ©e Equipe 2", JOptionPane.INFORMATION_MESSAGE, iconS);
 
 			
 		}
