@@ -4,107 +4,34 @@ import java.util.Scanner;
 
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+	
+	public class Saisie {
 
-public class Saisie {
-
-	static String message;
-	private Scanner unScanner;
-	static JOptionPane jop1;
-
-	public Saisie(String message) {
-		this.message = message;
-		jop1 = new JOptionPane();
-		unScanner = new Scanner(System.in);
-
-	}
-
-	public static String queVoulezVousFaire() {
-		String[] choix = { "Bouger un robot", "Tirer/Poser une mine", "Poser un robot" };
-		JOptionPane jop = new JOptionPane(), jop2 = new JOptionPane();
-		String nom = (String) jop.showInputDialog(null, "Que voulez-vous faire ?", "Choix action",
-				JOptionPane.QUESTION_MESSAGE, null, choix, choix[0]);
-		jop2.showMessageDialog(null, "Vous avez choisi de : " + nom, "Action choisie", JOptionPane.INFORMATION_MESSAGE);
-		return nom;
-	}
-
-	public static void presentation() {
-		jop1 = new JOptionPane();
-		ImageIcon img = new ImageIcon("image/valiant_hearts-0.jpg");
-		jop1.showMessageDialog(null,
-				"Bienvenue sur Virtual War \n Codé par Geoffrey, Louis, Gauthier, Raphaël, Alexandre", "Bienvenue",
-				JOptionPane.INFORMATION_MESSAGE, img);
-	}
-
-	public static Coord choixCoord() {
-		JOptionPane jop = new JOptionPane();
-		JOptionPane jop1 = new JOptionPane();
-		int x = 0;
-		int y = 0;
-		String b = "";
-		do {
+		private String message;
+		private Scanner unScanner;
+		
+		public Saisie(String message){
+			this.message = message;
+			unScanner = new Scanner(System.in);
 			
-			b = jop.showInputDialog(null, "Quel est son abscisse ?", "Choix X", JOptionPane.QUESTION_MESSAGE);
-
-			if (estNum(b)) {
-				x = Integer.parseInt(b);
-			}
-			if (x < 0 || x > 20) {
-				jop.showMessageDialog(null, "Votre abscisse n'est pas correcte", "Erreur", JOptionPane.ERROR_MESSAGE);
-			}
-		} while (x > 20 || x < 0 || !estNum(b));
-
-		do {
-				b=jop.showInputDialog(null, "Quel est son ordonnée ?", "Choix Y", JOptionPane.QUESTION_MESSAGE);
-				if(estNum(b)){
-					y=Integer.parseInt(b);
-				}
-			if (y > 20 || y < 0) {
-				jop.showMessageDialog(null, "Votre ordonnée n'est pas correcte", "Erreur", JOptionPane.ERROR_MESSAGE);
-
-			}
-		} while (y > 20 || y < 0 || !estNum(b));
-		return new Coord(x, y);
-		
-		
-	}
-
-	public static String SaisieString() {
-		// System.out.println(message + ": ");
-		return jop1.showInputDialog(null, message, "Mettez nous 20 svp");
-	}
-
-	public static boolean estNum(String chaine) {
-		for (int i = 0; i < chaine.length(); i++) {
-			if ((int) chaine.charAt(i) < 48 || (int) chaine.charAt(i) > 57) {
-				return false;
-			}
 		}
-		if(chaine.equals("")){
-			return false;
+		
+		public String SaisieString(){			
+			System.out.println(message + ": ");
+			return unScanner.next();
 		}
-		return true;
-	}
-
-	public static int SaisieInt() {
-		// System.out.println(message + ": ");
-		String mess = jop1.showInputDialog(null, message, "42");
-		return Integer.parseInt(mess);
-	}
-
-	public void setMessage(String message) {
-
-		this.message = message;
-	}
-
-	public static void main(String[] args) {
-		Saisie tank = new Saisie("Quel robot voulez vous bouger ?");
-		String a = "";
-		presentation();
-		Coord test = choixCoord();
-	
-	}
-	
-	public static boolean estInt(String chaine) {
+		
+		public int SaisieInt(){
+			System.out.println(message + ": ");
+			return unScanner.nextInt();
+		}
+		
+		public void setMessage(String message){
+			
+			this.message = message;
+		}
+		
+		public static boolean estInt(String chaine) {
 
 			for (int idx = 0; idx < chaine.length(); idx++) {
 
@@ -115,15 +42,15 @@ public class Saisie {
 			}
 			return true;
 		}
-	
-	public void configurationJoueur(Vue uneVue, Base uneBase, boolean equipe){
+		
+		public void configurationJoueur(Vue uneVue, Base uneBase, boolean equipe){
 			
-			final ImageIcon iconS = new ImageIcon("img/iconS.png");
-			final ImageIcon iconC = new ImageIcon("img/iconC.png");
-			final ImageIcon iconT = new ImageIcon("img/iconT.png");
-			final ImageIcon iconP = new ImageIcon("img/iconP.png");
-		    final ImageIcon iconCh = new ImageIcon("img/iconCh.png");
-			final ImageIcon iconR = new ImageIcon("img/iconR.png");
+			final ImageIcon iconS = new ImageIcon("image/iconS.png");
+			final ImageIcon iconC = new ImageIcon("image/iconC.png");
+			final ImageIcon iconT = new ImageIcon("image/iconT.png");
+			final ImageIcon iconP = new ImageIcon("image/iconP.png");
+		    final ImageIcon iconCh = new ImageIcon("image/iconCh.png");
+			final ImageIcon iconR = new ImageIcon("image/iconR.png");
 			
 			String nbT;
 			String nbC;
@@ -254,5 +181,4 @@ public class Saisie {
 			
 			
 		}
-	
 }

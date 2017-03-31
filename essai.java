@@ -6,109 +6,84 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
-
-
-
 public class essai {
 
-	public static boolean estInt(String chaine){
-		
-		for(int idx = 0; idx < chaine.length(); idx ++){
-			
-			if (chaine.charAt(idx) < '0' || chaine.charAt(idx) > '9'){
-				return false;
-			}
-			return true;
-		}
+	public static boolean equipe = false;
+
+	public static boolean partiFini() {
+
 		return false;
+		
 	}
-	
-		public static void main(String[] args) throws Exception {
+
+	public static void main(String[] args) throws Exception {
+
+		final ImageIcon iconS = new ImageIcon("image/iconS.png");
+		final ImageIcon iconC = new ImageIcon("image/iconC.png");
+		final ImageIcon iconR = new ImageIcon("image/iconR.png");
+		
+		Saisie uneSaisie = new Saisie(" ");
+		final String rules = "Les pays s'afrontent en faisant combatre des robots sur un plateau. \n Le jeu se déroule tour par tour, une équipe est choisie aléatoirement pour commencer la partie. \n Au départ les robots se trouvent dans leur base respective. \n A chaque tour de jeu, chaque équipe choisit un de ses robots pour réaliser une action (déplacement ou ataque). \n Une équipe ne peut pas passer son tour, tant qu'un de ses robots possède assez d'énergie pour réaliser une action elle doit jouer. \n Au cours de la partie chaque équipe doit conserver au moins un robot hors de sa base. \n La partie se termine dès qu'une des deux équipes ne possède plus de robot vivant.";
+		
+		JOptionPane.showMessageDialog(null, "Règles du jeu :\n" + "\n " + rules, "Virtual War", 1, iconR);
+		String h; 
+		String l;
+		String o;
+
+		do {
+
+			Object hauteur = JOptionPane.showInputDialog(null, "Plateau : Hauteur ?", "Configuration du plateau",
+					JOptionPane.QUESTION_MESSAGE, iconC, null, "10");
+			h = hauteur.toString();
 			
-			final ImageIcon iconS = new ImageIcon(new URL("http://files.softicons.com/download/toolbar-icons/mono-general-icons-by-custom-icon-design/png/256x256/success.png"));
-		    final ImageIcon iconC = new ImageIcon(new URL("https://image.flaticon.com/icons/png/128/44/44520.png"));
-		    String h;
-		    String l;
-		    String o;
-		   
-		    do {	
-		    	
-			Object hauteur = JOptionPane.showInputDialog(null,"Plateau : Hauteur ?","Configuration du plateau",JOptionPane.QUESTION_MESSAGE,iconC,null,"10");
-			 h = hauteur.toString();
-	
-		    } while(h.isEmpty() || !estInt(h));
-		     
-		    do {
-			Object largeur = JOptionPane.showInputDialog(null,"Plateau : Largeur ?","Configuration du plateau",JOptionPane.QUESTION_MESSAGE,iconC,null,"10");
-			l = largeur.toString();
-		    } while(l.isEmpty() || !estInt(l));
-		    
-		    do {
-			Object obstacle = JOptionPane.showInputDialog(null,"Obstacles : remplissage % ?","Configuration du plateau",JOptionPane.QUESTION_MESSAGE,iconC,null,"25");
-			o = obstacle.toString();
-			
-			if(o.contains("beaufils")){
-				o = "42";
-			}
-			
-		    } while(o.isEmpty() || !estInt(o));
-			 
-			
-			
-			Plateau unPlateau = new Plateau(Integer.valueOf(h),Integer.valueOf(l),Integer.valueOf(o));
-			JOptionPane.showMessageDialog(null, "Le plateau a été configurer avec succès ! \n----------- Place au jeu -----------","Configuration du plateau",JOptionPane.INFORMATION_MESSAGE,iconS);
-			
-			Base baseA = new Base(0,0,1);
-			Base baseB = new Base(unPlateau.getHauteur() -1,unPlateau.getLargeur() -1,2);
-			
-			unPlateau.addBase(baseA);
-			unPlateau.addBase(baseB);
-			
-			Vue equipeA = new Vue(1,unPlateau);
-			Vue equipeB = new Vue(2,unPlateau);
-			
-			Tireur test = new Tireur(equipeA,1,2,5);
-			Char testChar = new Char(equipeB,2,2,6);
-			Piegeur testP = new Piegeur(equipeA,1,2,7);
-			unPlateau.addRobot(test);
-			unPlateau.addRobot(testChar);
-			unPlateau.addRobot(testP);
-			
-			if (! equipeA.estDisponible(new Coord(2,5))){
-				System.out.println("Succes 1");
-			}
-			
-			if ( equipeB.estDisponible(new Coord(2,5))){
-				System.out.println("Succes 2");
-			}
-			
-			if (! equipeB.estDisponible(new Coord(2,6))){
-				System.out.println("Succes 3");
+			if (h.contains("beaufils")) {
+				h = "42";
 			}
 
-			if (! equipeA.estDisponible(new Coord(2,7))){
-				System.out.println("Succes 3");
+		} while (h.isEmpty() || ! uneSaisie.estInt(h));
+
+		do {
+			Object largeur = JOptionPane.showInputDialog(null, "Plateau : Largeur ?", "Configuration du plateau",
+					JOptionPane.QUESTION_MESSAGE, iconC, null, "10");
+			l = largeur.toString();
+			
+			if (l.contains("beaufils")) {
+				l = "42";
 			}
 			
-			unPlateau.addMine(new Coord(5,5), 1);
-			unPlateau.afficher();
-			Action poser = new Attaque(testP,unPlateau.grille[3][7]);
-			// System.out.println(equipeA.getContenu(new Coord(5,5)));
-			Action bouge= new Deplacement(testP,unPlateau.grille[2][8]);
+		} while (l.isEmpty() || ! uneSaisie.estInt(l));
+
+		do {
+			Object obstacle = JOptionPane.showInputDialog(null, "Obstacles : remplissage % ?",
+					"Configuration du plateau", JOptionPane.QUESTION_MESSAGE, iconC, null, "25");
+			o = obstacle.toString();
+
+			if (o.contains("beaufils")) {
+				o = "42";
+			}
+
+		} while (o.isEmpty() || !uneSaisie.estInt(o));
+
+		Plateau unPlateau = new Plateau(Integer.valueOf(h), Integer.valueOf(l), Integer.valueOf(o));
+		JOptionPane.showMessageDialog(null,"Le plateau a été configurer avec succès ! \n----------- Place au jeu -----------","Configuration du plateau", JOptionPane.INFORMATION_MESSAGE, iconS);
+
+		Base baseA = new Base(0, 0, 1);
+		Base baseB = new Base(unPlateau.getHauteur() - 1, unPlateau.getLargeur() - 1, 2);
+
+		unPlateau.addBase(baseA);
+		unPlateau.addBase(baseB);
+
+		Vue equipeA = new Vue(1, unPlateau);
+		Vue equipeB = new Vue(2, unPlateau);
+
+		uneSaisie.configurationJoueur(equipeA, baseA, false);
+		uneSaisie.configurationJoueur(equipeB, baseB, true);
 			
-			Action caca = new Deplacement(test,unPlateau.grille[2][4]);
-			
-			caca.agit();
-			poser.agit();
-			bouge.agit();
-			System.out.println(testP.getEnergie());
-			System.out.println("Equipe 1:");
-			unPlateau.afficherParEquipe(1);
-			System.out.println("Equipe 2:");
-			unPlateau.afficherParEquipe(2);
-			/*equipeA.poserRobot(testChar, new Coord(6,6));
-			unPlateau.afficher();
-		*/
-			
-		}
+		do {
+
+		} while (!partiFini());
+
+		unPlateau.afficher();
+
+	}
 }
