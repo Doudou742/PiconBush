@@ -26,8 +26,27 @@ public class Deplacement extends Action {
 			}
 
 		} else if (super.getRobot() instanceof Tireur || super.getRobot() instanceof Piegeur) {
+			
+			//permet de verifier la sortie du robot quand il est sur une base en haut a gauche
+			if (super.getRobot().getCoordonnee().getPositionX() == 0 && super.getRobot().getCoordonnee().getPositionY() == 0) {
+				if (super.objectif.getCoordCell().equals(super.getRobot().getCoordonnee().ajouterCoord(Constantes.bas)) || super.objectif.getCoordCell().equals(super.getRobot().getCoordonnee().ajouterCoord(Constantes.droite)) || super.objectif.getCoordCell().equals(super.getRobot().getCoordonnee().ajouterCoord(Constantes.diagoBasDroite))) {
+					if (Plateau.grille[objectif.getCoordCell().getPositionX()][objectif.getCoordCell().getPositionY()].estLibre()){
+						Plateau.grille[objectif.getCoordCell().getPositionX()][objectif.getCoordCell().getPositionY()].addRobot(super.getRobot());
+					}
+				}
+			}
+			
+			//permet de verifier la sortie du robot quand il est sur la base en bas a droite
+			else if (super.getRobot().getCoordonnee().getPositionX() == Plateau.grille.length && super.getRobot().getCoordonnee().getPositionY() == Plateau.grille[0].length) {
+				if (super.objectif.getCoordCell().equals(super.getRobot().getCoordonnee().ajouterCoord(Constantes.haut)) || super.objectif.getCoordCell().equals(super.getRobot().getCoordonnee().ajouterCoord(Constantes.gauche)) || super.objectif.getCoordCell().equals(super.getRobot().getCoordonnee().ajouterCoord(Constantes.diagoHautGauche))) {
+					if (Plateau.grille[objectif.getCoordCell().getPositionX()][objectif.getCoordCell().getPositionY()].estLibre()){
+						Plateau.grille[objectif.getCoordCell().getPositionX()][objectif.getCoordCell().getPositionY()].addRobot(super.getRobot());
+					}
+				}
+			}
+			
 			// deplacement de 1
-			if (objectif.estLibre() && peutYAller()) {
+			else if (objectif.estLibre() && peutYAller()) {
 				if (!objectif.contiensObstacle()) {
 					if (objectif.contiensMine()) {
 						Coord tmp = super.getRobot().getCoordonnee();
@@ -57,9 +76,10 @@ public class Deplacement extends Action {
 						}
 					}
 				}
-
 			}
+			
 		}
+		
 	}
 
 	public boolean peutYAller() {

@@ -13,7 +13,13 @@ public class Plateau {
 	private int hauteur;
 	private int percentObst; // pourcentages d'obstacles max 50
 	public static Cellule[][] grille;
-
+	
+	/**
+	 * permet de creer un plateau avec des dimensions et un pourcentage d obstacle
+	 * @param larg
+	 * @param haut
+	 * @param obst
+	 */
 	public Plateau(int larg, int haut, int obst) {
 		grille = new Cellule[larg][haut];
 		this.largeur = larg;

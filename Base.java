@@ -3,7 +3,7 @@ package personnages;
 public class Base extends Cellule{
 
 	private int equipe;
-	private Robot[] tableauRobot = new Robot[5];
+	//private Robot[] tableauRobot = new Robot[5];
 	
 	public Base(int largeur, int hauteur, int equipe){
 		// R�cup�re le constructeur de la classe abstraite Cellule
@@ -41,17 +41,17 @@ public class Base extends Cellule{
 		//this.unRobot.setCoordonnee(this.getCoordonnees());
 	}
 
-	public Robot[] getTableauRobot() {
-		return tableauRobot;
-	}
-
-	public void setTableauRobot(Robot[] tableauRobot) {
-		this.tableauRobot = tableauRobot;
-	}
-	
-	public void addRobotDansTableau(Robot r, int idx){
-		this.tableauRobot[idx] = r;
-	}
+//	public Robot[] getTableauRobot() {
+//		return tableauRobot;
+//	}
+//
+//	public void setTableauRobot(Robot[] tableauRobot) {
+//		this.tableauRobot = tableauRobot;
+//	}
+//	
+//	public void addRobotDansTableau(Robot r, int idx){
+//		this.tableauRobot[idx] = r;
+//	}
 	
 	
 	
