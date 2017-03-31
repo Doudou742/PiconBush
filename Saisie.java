@@ -219,7 +219,7 @@ public void configurationJoueur(Vue uneVue, Base uneBase, boolean equipe){
 					nbrobotB += Integer.valueOf(nbTB);
 					for (int idx = 0; idx < Integer.valueOf(nbTB); idx++) {
 
-						uneBase.addRobot(new Tireur(uneVue, 1, Plateau.grille.length -1, Plateau.grille[0].length));
+						uneBase.addRobot(new Tireur(uneVue, 2, Plateau.grille.length -1, Plateau.grille[0].length));
 					}
 				}
 			} while (Integer.valueOf(nbTB) > max || nbrobotB > max);
@@ -238,7 +238,7 @@ public void configurationJoueur(Vue uneVue, Base uneBase, boolean equipe){
 						
 						for (int idx = 0; idx < Integer.valueOf(nbPB); idx++) {
 
-							uneBase.addRobot(new Piegeur(uneVue, 1, Plateau.grille.length -1, Plateau.grille[0].length));
+							uneBase.addRobot(new Piegeur(uneVue, 2, Plateau.grille.length -1, Plateau.grille[0].length));
 						}
 					
 				} while (nbrobotB > max);
@@ -256,7 +256,7 @@ public void configurationJoueur(Vue uneVue, Base uneBase, boolean equipe){
 						
 						for (int idx = 0; idx < Integer.valueOf(nbCB); idx++) {
 
-							uneBase.addRobot(new Piegeur(uneVue, 1,Plateau.grille.length -1, Plateau.grille[0].length));
+							uneBase.addRobot(new Piegeur(uneVue, 2,Plateau.grille.length -1, Plateau.grille[0].length));
 						}
 					
 				} while (nbrobotB > max);
