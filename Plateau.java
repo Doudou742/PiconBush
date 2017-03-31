@@ -196,5 +196,18 @@ public class Plateau {
 		System.out.println(equipe1);
 		System.out.println(equipe2);
 	}
+	public int percentVie(Robot robot) {
+		int vie;
+		if(robot instanceof Char) {
+			vie = 100*robot.getEnergie()/Constantes.getEnergieTank();
+		}
+		else if(robot instanceof Piegeur) {
+			vie = 100*robot.getEnergie()/Constantes.getEnergiePiegeur();
+		}
+		else {
+			vie = 100*robot.getEnergie()/Constantes.getEnergieTireur();
+		}
+		return vie;
+	}
 
 }
