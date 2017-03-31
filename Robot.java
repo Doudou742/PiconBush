@@ -66,13 +66,15 @@ abstract public class Robot {
 	abstract public boolean cibeVide(Cellule cellule);
 	abstract public String toString();
 	abstract public void regen();
-	public void subitDegat(){
-		if(this instanceof Char){
-			energie-=6;
-		}else if(this instanceof Piegeur){
-			energie-=2;
-		}else if(this instanceof Tireur){
-			energie-=3;
+	public void subitDegat(Robot robotAttack){
+		if(robotAttack instanceof Char) {
+			this.energie-=6;
+		}
+		else if(robotAttack instanceof Tireur) {
+			this.energie-=3;
+		}
+		else {
+			this.energie-=2;
 		}
 	}
 	
