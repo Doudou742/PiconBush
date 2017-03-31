@@ -29,7 +29,7 @@ public class Saisie {
 
 	public static void presentation() {
 		jop1 = new JOptionPane();
-		ImageIcon img = new ImageIcon("image/virtualwar.jpg");
+		ImageIcon img = new ImageIcon("image/valiant_hearts-0.jpg");
 		jop1.showMessageDialog(null,
 				"Bienvenue sur Virtual War \n Codé par Geoffrey, Louis, Gauthier, Raphaël, Alexandre", "Bienvenue",
 				JOptionPane.INFORMATION_MESSAGE, img);
