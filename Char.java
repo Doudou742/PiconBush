@@ -100,39 +100,39 @@ public class Char extends Robot {
 	 * haut bas gauche droite
 	 */
 	public boolean tirer(Coord direction){
-		int	energieRetirer; // Sert a ne pas tout écrire sur une ligne plutard 
 		// Coordonnées de la cellule courante de la boucle
 		Coord coordBoucle= new Coord(this.getCoordonnee().getPositionX(), this.getCoordonnee().getPositionY());
 		boolean peutPasTirer, robotEnnemie;
-				
+		
 		// Il tire a 10 cases de distance donc une boucle de 10
 		for(int i = 0 ; i<Constantes.getPorteeTank() ; i++){
-			// On ajoute les coordonnées de la direction et celle de la cellule courante pour ce déplacer vers le haut/bas/gauche/droite.
-			coordBoucle.ajouterCoord(direction);
+			coordBoucle=coordBoucle.ajouterCoord(direction);
+			
+			System.out.println(Plateau.grille[coordBoucle.getPositionX()][coordBoucle.getPositionY()]);
+			
 			
 			// robotEnnemie = Si il y a un robot ennemie sur la case courante.
-			robotEnnemie = Plateau.grille[coordBoucle.getPositionX()][coordBoucle.getPositionY()].getUnRobot().getEquipe() != this.getEquipe();
+			robotEnnemie = 	Plateau.grille[coordBoucle.getPositionX()][coordBoucle.getPositionY()].contienRobot() &&
+							Plateau.grille[coordBoucle.getPositionX()][coordBoucle.getPositionY()].getUnRobot().getEquipe() != this.getEnergie();
 			
-			// On ne peux pas tirer si il y a un obstacle, la case est vide, un robot allié
 			peutPasTirer = 	Plateau.grille[coordBoucle.getPositionX()][coordBoucle.getPositionY()].contiensObstacle() || // Un obstacle
 							( Plateau.grille[coordBoucle.getPositionX()][coordBoucle.getPositionY()].contienRobot() && // Un robot mais ...
 										Plateau.grille[coordBoucle.getPositionX()][coordBoucle.getPositionY()].getUnRobot().getEquipe() == this.getEquipe() ); // ... De notre equipe
 			
 			
-			// max =(a>b)? a:b;
-			// Si il y a un obstacle ou un robot allié
-			if( peutPasTirer ){
+			
+			if( peutPasTirer ){ // Si il y a un obstacle ou un robot allié
 				return false;
 			}else if (robotEnnemie && this.peutTirer()){ // Si c'est un robot ennemie et qu'on a assez d'energie
-				
 				// On modifie l'energie du robot qui tire 
 				super.setEnergie(super.getEnergie() + coutAction);
 				// Et du robot qui est touché.
-				// La cellule courante, son robot, son energie, qui vaux l'energie son energie moins les degats
-				energieRetirer = Plateau.grille[coordBoucle.getPositionX()][coordBoucle.getPositionY()].getUnRobot().getEnergie() + this.degat;
-				Plateau.grille[coordBoucle.getPositionX()][coordBoucle.getPositionY()].getUnRobot().setEnergie(energieRetirer);
+				Plateau.grille[coordBoucle.getPositionX()][coordBoucle.getPositionY()].getUnRobot().subitDegat();
 				return true;				
 			}
+			
+			
+			// Ici regarder si a la prochaine itération on sort du tableau
 			
 			
 		}
