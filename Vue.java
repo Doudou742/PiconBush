@@ -1,4 +1,4 @@
-package personnages;
+
 
 
 public class Vue {

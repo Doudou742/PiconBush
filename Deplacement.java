@@ -1,6 +1,4 @@
-package personnages;
 
-import plateau.Plateau;
 
 public class Deplacement extends Action {
 
@@ -8,22 +6,22 @@ public class Deplacement extends Action {
 		super(robot, objectif);
 	}
 
-	public void agit() {
+	public void bougerRobot() {
 		if (super.getRobot() instanceof Char) {
-			if (objectif.estLibre() && peutYAllerChar()) {
-				if (objectif.contiensMine()) {
+			if(objectif.estLibre() && peutYAllerChar()){
+				if(objectif.contiensMine()){
 					Coord tmp = super.getRobot().getCoordonnee();
 					objectif.deplaceSur(super.getRobot());
 					Plateau.grille[tmp.getPositionX()][tmp.getPositionY()].videCase();
 					super.getRobot().subitDegat();
-					super.getRobot().setEnergie(super.getRobot().getEnergie() - Constantes.getCoutDeplacementTank());
-				} else {
+					super.getRobot().setEnergie(super.getRobot().getEnergie()-Constantes.getCoutDeplacementTank());
+				}else {
 					Coord tmp = super.getRobot().getCoordonnee();
 					objectif.deplaceSur(super.getRobot());
 					Plateau.grille[tmp.getPositionX()][tmp.getPositionY()].videCase();
-					super.getRobot().setEnergie(super.getRobot().getEnergie() - Constantes.getCoutDeplacementTank());
+					super.getRobot().setEnergie(super.getRobot().getEnergie()-Constantes.getCoutDeplacementTank());
 				}
-
+				
 			}
 
 		} else if (super.getRobot() instanceof Tireur || super.getRobot() instanceof Piegeur) {
@@ -35,26 +33,19 @@ public class Deplacement extends Action {
 						objectif.deplaceSur(super.getRobot());
 						Plateau.grille[tmp.getPositionX()][tmp.getPositionY()].videCase();
 						super.getRobot().subitDegat();
-						if (super.getRobot() instanceof Tireur) {
-							super.getRobot()
-									.setEnergie(super.getRobot().getEnergie() - Constantes.getCoutDeplacementTireur());
-						} else {
-							super.getRobot()
-									.setEnergie(super.getRobot().getEnergie() - Constantes.getCoutDeplacementPiegeur());
+						if(super.getRobot() instanceof Tireur){
+							super.getRobot().setEnergie(super.getRobot().getEnergie()-Constantes.getCoutDeplacementTireur());
+						}else {
+							super.getRobot().setEnergie(super.getRobot().getEnergie()-Constantes.getCoutDeplacementPiegeur());
 						}
-					}//retour base ??????????? 
-					else if (objectif.estBase() == super.getRobot().getEquipe()) {
-					super.getRobot().regen();
 					} else {
 						Coord tmp = super.getRobot().getCoordonnee();
 						objectif.deplaceSur(super.getRobot());
 						Plateau.grille[tmp.getPositionX()][tmp.getPositionY()].videCase();
-						if (super.getRobot() instanceof Tireur) {
-							super.getRobot()
-									.setEnergie(super.getRobot().getEnergie() - Constantes.getCoutDeplacementTireur());
-						} else {
-							super.getRobot()
-									.setEnergie(super.getRobot().getEnergie() - Constantes.getCoutDeplacementPiegeur());
+						if(super.getRobot() instanceof Tireur){
+							super.getRobot().setEnergie(super.getRobot().getEnergie()-Constantes.getCoutDeplacementTireur());
+						}else {
+							super.getRobot().setEnergie(super.getRobot().getEnergie()-Constantes.getCoutDeplacementPiegeur());
 						}
 					}
 				}
@@ -92,26 +83,31 @@ public class Deplacement extends Action {
 		}
 	}
 
-	public boolean peutYAllerChar() {
+	public boolean peutYAllerChar() { //
 		if (!objectif.contiensObstacle()) {
-			if (super.getRobot().getCoordonnee().ajouterCoord(Constantes.hautChar)
+			if (super.getRobot().getCoordonnee().ajouterCoord(Constantes.hautTank)
 					.equals(super.getObjectif().getCoordCell())) {
 				return true;
-			} else if (super.getRobot().getCoordonnee().ajouterCoord(Constantes.basChar)
+			} else if (super.getRobot().getCoordonnee().ajouterCoord(Constantes.basTank)
 					.equals(super.getObjectif().getCoordCell())) {
 				return true;
-			} else if (super.getRobot().getCoordonnee().ajouterCoord(Constantes.droiteChar)
+			} else if (super.getRobot().getCoordonnee().ajouterCoord(Constantes.droiteTank)
 					.equals(super.getObjectif().getCoordCell())) {
 				return true;
-			} else if (super.getRobot().getCoordonnee().ajouterCoord(Constantes.gaucheChar)
+			} else if (super.getRobot().getCoordonnee().ajouterCoord(Constantes.gaucheTank)
 					.equals(super.getObjectif().getCoordCell())) {
 				return true;
 			}
-		} else if (objectif.contiensObstacle()) {
-			// a faire le déplacement de 1
+		}else if(objectif.contiensObstacle()) { 
+			// a faire le d�placement de 1 
 		}
-
+		
 		return false;
+
+	}
+
+	@Override
+	public void agit() {
 
 	}
 
