@@ -24,6 +24,7 @@ public class Essai {
 	public static void sortirRobotBase(int[] tableauEquipe1, Vue equipe, Base base, boolean e, Plateau unPlateau,
 			String choixEquipe) {
 		Saisie uneSaisie = new Saisie(" ");
+		uneSaisie.presentation();
 		String robotADeplacerAuDebut = "";
 		if (!e) {
 			// String choixEquipe1 = Saisie.queVoulezVousFaire();
