@@ -28,7 +28,7 @@ public class Essai {
 		if (!e) {
 			// String choixEquipe1 = Saisie.queVoulezVousFaire();
 			if (choixEquipe.equals("Sortir un robot de la base")) {
-				robotADeplacerAuDebut = Saisie.choixRobotDebut();
+				robotADeplacerAuDebut = Saisie.QuelType();
 				// tab 0 = tireur tab 1 = piegeur tab 2 = char
 				if (tableauEquipe1[0] != 0 && tableauEquipe1[1] != 0 && tableauEquipe1[2] != 0) {
 					if (robotADeplacerAuDebut.equals("Tireur") && tableauEquipe1[0] > 0) {
@@ -70,7 +70,7 @@ public class Essai {
 		else {
 			// String choixEquipe2 = Saisie.queVoulezVousFaire();
 			if (choixEquipe.equals("Sortir un robot de la base")) {
-				robotADeplacerAuDebut = Saisie.choixRobotDebut();
+				robotADeplacerAuDebut = Saisie.QuelType();
 				// tab 0 = tireur tab 1 = piegeur tab 2 = char
 				if (tableauEquipe1[0] != 0 && tableauEquipe1[1] != 0 && tableauEquipe1[2] != 0) {
 					if (robotADeplacerAuDebut.equals("Tireur") && tableauEquipe1[0] > 0) {
@@ -117,7 +117,7 @@ public class Essai {
 		final ImageIcon iconR = new ImageIcon("image/iconR.png");
 
 		Saisie uneSaisie = new Saisie(" ");
-		final String rules = "Les pays s'afrontent en faisant combatre des robots sur un plateau. \n Le jeu se déroule tour par tour, une équipe est choisie aléatoirement pour commencer la partie. \n Au départ les robots se trouvent dans leur base respective. \n A chaque tour de jeu, chaque équipe choisit un de ses robots pour réaliser une action (déplacement ou ataque). \n Une équipe ne peut pas passer son tour, tant qu'un de ses robots possède assez d'énergie pour réaliser une action elle doit jouer. \n Au cours de la partie chaque équipe doit conserver au moins un robot hors de sa base. \n La partie se termine dès qu'une des deux équipes ne possède plus de robot vivant.";
+		final String rules = "Les pays s'afrontent en faisant combatre des robots sur un plateau. \n Le jeu se déroule tour par tour, une équipe est choisie aléatoirement pour commencer la partie. \n Au départ les robots se trouvent dans leur base respective. \n A chaque tour de jeu, chaque équipe choisit un de ses robots pour réaliser une action (déplacement ou ataque). \n Une équipe ne peut pas passer son tour, tant qu'un de ses robots possède assez d'énergie pour réaliser une action elle doit jouer. \n Au cours de la partie chaque équipe doit conserver au moins un robot hors de sa base. \n La partie se termine dès qu'une des deux équipes ne possède plus de robot vivant.";
 
 		JOptionPane.showMessageDialog(null, "Règles du jeu :\n" + "\n " + rules, "Virtual War", 1, iconR);
 		String h;
