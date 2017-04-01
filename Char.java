@@ -19,127 +19,50 @@ public class Char extends Robot {
 		coutDep=Constantes.getCoutDeplacementTank();
 		degat=Constantes.getDegatsTank();
 	}
-	/*
-	 * Verifier qu'il n'y ai pas d'obstacle entre les deux (obs, qqun d'autre etc)
-	 */
-//	public boolean tirer(Cellule cellule) {
-//		
-//		// Position (x ou y) de la cible et du char.
-//		int x = this.getCoordonnee().getPositionX(),
-//			y = this.getCoordonnee().getPositionY();
-//		
-//		boolean MmLigne = cellule.getCoordCell().getPositionX() == this.getCoordonnee().getPositionX(),
-//				MmColonne = cellule.getCoordCell().getPositionY() == this.getCoordonnee().getPositionY();
-//		
-//		// Si la cellule est vide on ne peux tirer
-//		if (cellule.estLibre() ||  cellule.getUnRobot() == null   ){
-//			return false;
-//		}
-//		
-//		// Si il y a un robot
-//		else if (cellule.getUnRobot() != null) {
-//			// Si c'est un robot de son equipe on ne peux tirer
-//			if (cellule.getUnRobot().getEquipe() == this.getEquipe()) {
-//				return false;
-//			}
-//			// Si c'est un robot ennemi
-//			else {
-//				// Si il est sur la mm ligne
-//				
-//				// Soit x ou y, soit sur la même ligne soit sur la même colonne.
-//				if(MmLigne){	
-//					// Tant qu'on n'a pas regardé entre les deux.
-//					while(x != cellule.getCoordCell().getPositionX()){
-//							
-//						//Si tireur a gauche (ou au dessus) de cible on incrémente sinon on décrémente.
-//						if(x < cellule.getCoordCell().getPositionX()){
-//							x++;
-//						}else{
-//							x--;
-//						}
-//						// Si il y a qqch entre le tireur et la cible, on quitte.
-//						if(! (Plateau.grille[x][this.getCoordonnee().getPositionY()].estLibre()) ){
-//							return false;
-//						}
-//					}
-//				}
-//					
-//				// if mm colonne
-//				if(MmColonne){
-//					// Tant qu'on est entre le tireur et la cible
-//					while(y != cellule.getCoordCell().getPositionY()){			
-//						
-//						//Si tireur au dessus cible on incrémente sinon on décrémente.
-//						if(y < cellule.getCoordCell().getPositionY()){
-//							y++;
-//						}else{
-//							y--;
-//						}
-//						// Si il y a qqch entre le tireur et la cible, on quitte.
-//						// Récupérer la cellule par une coordonné 
-//						// a refaire 
-//						if(! (Plateau.grille[y][this.getCoordonnee().getPositionX()].estLibre() ) ){
-//							return false;
-//						}
-//					}
-//				
-//				}
-//					
-//				// On modifie l'energie du robot qui tire 
-//				super.setEnergie(super.getEnergie() + coutAction);
-//				// Et du robot qui est touché.
-//				cellule.getUnRobot().setEnergie(cellule.getUnRobot().getEnergie() + this.degat);
-//				return true;
-//			}
-//		}
-//		
-//	}
 	
 	
-	/* Prend en paramètre une direction de la classe Constante.
-	 * haut bas gauche droite
-	 */
+	
 	public boolean tirer(Coord direction){
-		// Coordonnées de la cellule courante de la boucle
-		Coord coordBoucle= new Coord(this.getCoordonnee().getPositionX(), this.getCoordonnee().getPositionY());
-		boolean peutPasTirer, robotEnnemie;
+		Coord coordBoucle= new Coord(this.getCoordonnee().getPositionX(), this.getCoordonnee().getPositionY()); 	// Coordonnées de la cellule courante de la boucle
+		boolean peutPasTirer, robotEnnemie; 	// Savoir si : on peut tirer/il y a un robot ennemie sur la case.
 		
-		// Il tire a 10 cases de distance donc une boucle de 10
+		// On tourne pour toute la porté d'un tank.
 		for(int i = 0 ; i<Constantes.getPorteeTank() ; i++){
 			coordBoucle=coordBoucle.ajouterCoord(direction);
 			
-			System.out.println(Plateau.grille[coordBoucle.getPositionX()][coordBoucle.getPositionY()]);
-			
+			// On regarde si on sort du plateau. (Le repère du plateau est orienté chelou)
+			if( 
+					coordBoucle.getPositionY()+1 > Plateau.grille[0].length		|| 	// Droite
+					coordBoucle.getPositionX()+1 > Plateau.grille.length 		||	// Bas
+					coordBoucle.getPositionX() < 0								||	// Haut
+					coordBoucle.getPositionY() < 0	)								// Gauche
+			{
+				return false;
+			}
 			
 			// robotEnnemie = Si il y a un robot ennemie sur la case courante.
 			robotEnnemie = 	Plateau.grille[coordBoucle.getPositionX()][coordBoucle.getPositionY()].contienRobot() &&
-							Plateau.grille[coordBoucle.getPositionX()][coordBoucle.getPositionY()].getUnRobot().getEquipe() != this.getEnergie();
+							Plateau.grille[coordBoucle.getPositionX()][coordBoucle.getPositionY()].getUnRobot().getEquipe() != this.getEquipe();
 			
-			peutPasTirer = 	Plateau.grille[coordBoucle.getPositionX()][coordBoucle.getPositionY()].contiensObstacle() || // Un obstacle
-							( Plateau.grille[coordBoucle.getPositionX()][coordBoucle.getPositionY()].contienRobot() && // Un robot mais ...
+			// On regarde si sur la case il y a :
+			peutPasTirer = 	Plateau.grille[coordBoucle.getPositionX()][coordBoucle.getPositionY()].contiensObstacle() || 	// Un obstacle
+							( Plateau.grille[coordBoucle.getPositionX()][coordBoucle.getPositionY()].contienRobot() && 		// Un robot mais ...
 										Plateau.grille[coordBoucle.getPositionX()][coordBoucle.getPositionY()].getUnRobot().getEquipe() == this.getEquipe() ); // ... De notre equipe
 			
 			
-			
 			if( peutPasTirer ){ // Si il y a un obstacle ou un robot allié
-				return false;
+				return false;	// On ne tire pas.
 			}else if (robotEnnemie && this.peutTirer()){ // Si c'est un robot ennemie et qu'on a assez d'energie
-				// On modifie l'energie du robot qui tire 
-				super.setEnergie(super.getEnergie() + coutAction);
-				// Et du robot qui est touché.
-				Plateau.grille[coordBoucle.getPositionX()][coordBoucle.getPositionY()].getUnRobot().subitDegat();
-				return true;				
+				super.setEnergie(super.getEnergie() + coutAction); 	// On modifie l'energie du robot qui tire  
+				Plateau.grille[coordBoucle.getPositionX()][coordBoucle.getPositionY()].getUnRobot().subitDegat(); // Et du robot qui est touché.
+				return true; // On a réussi a tirer on sort de la boucle (oui violemment oui)				
 			}
-			
-			
-			// Ici regarder si a la prochaine itération on sort du tableau
-			
-			
 		}
 		// Si jamais on est sorti de la porté et qu'on a tiré sur rien (tt les cases étaient vide) Alors on ne peux pas tirer
 		return false;
-		
 	}
+
+	
 	
 	
 	@Override
