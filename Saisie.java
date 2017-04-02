@@ -11,6 +11,8 @@ public class Saisie {
 	static String message;
 	private Scanner unScanner;
 	static JOptionPane jop1;
+	public static ImageIcon iconQ = new ImageIcon("image/iconQ.png");
+	public static ImageIcon iconOk = new ImageIcon("image/iconS.png");
 
 	public Saisie(String message) {
 		this.message = message;
@@ -21,7 +23,7 @@ public class Saisie {
 
 public static Coord DeplacerDemande(){
 		
-		ImageIcon iconQ = new ImageIcon("image/iconQ.png");
+		
 		String l;
 		String c;
 		
@@ -43,11 +45,17 @@ public static Coord DeplacerDemande(){
 	public static String queVoulezVousFaire() {
 		String[] choix = { "Bouger un robot","Sortir un robot de la base", "Tirer/Poser une mine"};
 		JOptionPane jop = new JOptionPane(), jop2 = new JOptionPane();
-		String nom = (String) jop.showInputDialog(null, "Que voulez-vous faire ?", "Choix action",
-				JOptionPane.QUESTION_MESSAGE, null, choix, choix[0]);
-		jop2.showMessageDialog(null, "Vous avez choisi de : " + nom, "Action choisie", JOptionPane.INFORMATION_MESSAGE);
+		String nom = (String) jop.showInputDialog(null, "Que voulez-vous faire ?", "Choix action",JOptionPane.QUESTION_MESSAGE, iconQ, choix, choix[0]);
+		jop2.showMessageDialog(null, "Vous avez choisi de : " + nom, "Action choisie", JOptionPane.INFORMATION_MESSAGE,iconOk);
 		return nom;
 	}
+	
+		public static String QuelType(){
+			
+			String[]choix = {"Tireur","Piegeur","Char"};
+			return (String) JOptionPane.showInputDialog(null,"Quel type de robot voulez vous bouger?","Sortir un Robot de la base",JOptionPane.QUESTION_MESSAGE,iconQ,choix,choix[0]);
+			
+		}
 
 	public static void presentation() {
 		jop1 = new JOptionPane();
@@ -65,7 +73,7 @@ public static Coord DeplacerDemande(){
 		String b = "";
 		do {
 			
-			b = jop.showInputDialog(null, "Ligne ?", "Choix déplacement", JOptionPane.QUESTION_MESSAGE);
+			b = (String)jop.showInputDialog(null, "Ligne ?", "Choix déplacement", JOptionPane.QUESTION_MESSAGE,iconQ,null,"");
 
 			if (estNum(b)) {
 				x = Integer.parseInt(b);
@@ -76,7 +84,7 @@ public static Coord DeplacerDemande(){
 		} while (x > 20 || x < 0 || !estNum(b));
 
 		do {
-				b=jop.showInputDialog(null, "Quel est sa colonne ?", "Choix déplacement", JOptionPane.QUESTION_MESSAGE);
+				b= (String) jop.showInputDialog(null, "Quel est sa colonne ?", "Choix déplacement", JOptionPane.QUESTION_MESSAGE,iconQ,null,"");
 				if(estNum(b)){
 					y=Integer.parseInt(b);
 				}
@@ -193,7 +201,6 @@ public static Coord DeplacerDemande(){
 					nbRobotDeChaqueType[1] = Integer.valueOf(nbP);
 					/*
 					for (int idx = 0; idx < Integer.valueOf(nbP); idx++) {
-
 						//uneBase.addRobot(new Piegeur(uneVue, 1, 0, 0));
 						uneBase.addRobotDansTableau(new Piegeur(uneVue, 1, 0, 0), idx);
 					}
@@ -213,7 +220,6 @@ public static Coord DeplacerDemande(){
 					nbRobotDeChaqueType[2] = Integer.valueOf(nbC);
 					/*
 					for (int idx = 0; idx < Integer.valueOf(nbC); idx++) {
-
 						//uneBase.addRobot(new Piegeur(uneVue, 1, 0, 0));
 						uneBase.addRobotDansTableau(new Char(uneVue, 1, 0, 0), idx);
 					}
@@ -260,7 +266,6 @@ public static Coord DeplacerDemande(){
 						
 						/*
 						for (int idx = 0; idx < Integer.valueOf(nbPB); idx++) {
-
 							//uneBase.addRobot(new Piegeur(uneVue, 1, Plateau.grille.length -1, Plateau.grille[0].length));
 							uneBase.addRobotDansTableau(new Piegeur(uneVue, 2, Plateau.grille.length -1, Plateau.grille[0].length), idx);
 						}
@@ -280,7 +285,6 @@ public static Coord DeplacerDemande(){
 						nbRobotDeChaqueType[2] = Integer.valueOf(nbCB);
 						/*
 						for (int idx = 0; idx < Integer.valueOf(nbCB); idx++) {
-
 							//uneBase.addRobot(new Piegeur(uneVue, 1,Plateau.grille.length -1, Plateau.grille[0].length));
 							uneBase.addRobotDansTableau(new Char(uneVue, 2, Plateau.grille.length -1, Plateau.grille[0].length), idx);
 						}
