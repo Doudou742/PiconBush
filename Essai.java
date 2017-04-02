@@ -18,7 +18,6 @@ public class Essai {
 
 	public static int[] configEquipe(Vue equipe, Base base, boolean e) {
 		Saisie uneSaisie = new Saisie(" ");
-		uneSaisie.presentation();
 		return uneSaisie.configurationJoueur(equipe, base, e);
 	}
 
@@ -118,6 +117,7 @@ public class Essai {
 		final ImageIcon iconR = new ImageIcon("image/iconR.png");
 
 		Saisie uneSaisie = new Saisie(" ");
+		uneSaisie.presentation();
 		final String rules = "Les pays s'affrontent en faisant combattre des robots sur un plateau. \n Le jeu se déroule tour par tour, une équipe est choisie aléatoirement pour commencer la partie. \n Au départ les robots se trouvent dans leur base respective. \n A chaque tour de jeu, chaque équipe choisit un de ses robots pour réaliser une action (déplacement ou attaque). \n Une équipe ne peut pas passer son tour, tant qu'un de ses robots possède assez d'énergie pour réaliser une action elle doit jouer. \n Au cours de la partie chaque équipe doit conserver au moins un robot hors de sa base. \n La partie se termine dès qu'une des deux équipes ne possède plus de robot vivant.";
 
 		JOptionPane.showMessageDialog(null, "Règles du jeu :\n" + "\n " + rules, "Virtual War", 1, iconR);
