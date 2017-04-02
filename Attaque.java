@@ -28,8 +28,8 @@ public class Attaque extends Action {
 				if (cellule.getUnRobot().getEquipe() == super.getRobot().getEquipe()) {
 					return false;
 				} else if (super.getRobot().peutTirer()) {
-					super.getRobot().setEnergie(super.getRobot().getEnergie() + super.getRobot().getCoutAction());
-					cellule.getUnRobot().setEnergie(cellule.getUnRobot().getEnergie() + super.getRobot().getDegat());
+					super.getRobot().setEnergie(super.getRobot().getEnergie() - super.getRobot().getCoutAction());
+					cellule.getUnRobot().setEnergie(cellule.getUnRobot().getEnergie() - super.getRobot().getDegat());
 					return true;
 				}
 			}
@@ -61,12 +61,12 @@ public class Attaque extends Action {
 			else {
 				// Si il est sur la mm ligne
 				
-				// Soit x ou y, soit sur la même ligne soit sur la même colonne.
+				// Soit x ou y, soit sur la mï¿½me ligne soit sur la mï¿½me colonne.
 				if(MmLigne){	
-					// Tant qu'on n'a pas regardé entre les deux.
+					// Tant qu'on n'a pas regardï¿½ entre les deux.
 					while(x != cellule.getCoordCell().getPositionX()){
 							
-						//Si tireur a gauche (ou au dessus) de cible on incrémente sinon on décrémente.
+						//Si tireur a gauche (ou au dessus) de cible on incrï¿½mente sinon on dï¿½crï¿½mente.
 						if(x < cellule.getCoordCell().getPositionX()){
 							x++;
 						}else{
@@ -84,14 +84,14 @@ public class Attaque extends Action {
 					// Tant qu'on est entre le tireur et la cible
 					while(y != cellule.getCoordCell().getPositionY()){			
 						
-						//Si tireur au dessus cible on incrémente sinon on décrémente.
+						//Si tireur au dessus cible on incrï¿½mente sinon on dï¿½crï¿½mente.
 						if(y < cellule.getCoordCell().getPositionY()){
 							y++;
 						}else{
 							y--;
 						}
 						// Si il y a qqch entre le tireur et la cible, on quitte.
-						// Récupérer la cellule par une coordonné 
+						// Rï¿½cupï¿½rer la cellule par une coordonnï¿½ 
 						// a refaire 
 						if(! (Plateau.grille[y][ super.getRobot().getCoordonnee().getPositionX()].estLibre() ) ){
 							return false;
@@ -102,7 +102,7 @@ public class Attaque extends Action {
 					
 				// On modifie l'energie du robot qui tire 
 				super.getRobot().setEnergie( super.getRobot().getEnergie() -  super.getRobot().getCoutAction());
-				// Et du robot qui est touché.
+				// Et du robot qui est touchï¿½.
 				cellule.getUnRobot().setEnergie(cellule.getUnRobot().getEnergie() -  super.getRobot().getDegat());
 				return true;
 			}
