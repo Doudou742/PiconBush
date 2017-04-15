@@ -43,19 +43,19 @@ public class Constantes {
 	
 	//déplacement
 	
-	public final static Coord gauche=new Coord(0,-1);;
-	public final static Coord droite=new Coord(0,1); 
-	public final static Coord haut=new Coord(-1,0);
-	public final static Coord bas=new Coord(1,0);
+	public final static Coord haut=new Coord(0,-1);;
+	public final static Coord bas=new Coord(0,1); 
+	public final static Coord gauche=new Coord(-1,0);
+	public final static Coord droite=new Coord(1,0);
 	public final static Coord diagoBasDroite=new Coord(1,1);
 	public final static Coord diagoHautGauche=new Coord(-1,-1);
 	public final static Coord diagoBasGauche=new Coord(1,-1);
 	public final static Coord diagoHautDroite=new Coord(-1,1);
 	
-	public final static Coord hautChar = new Coord(-2,0);
-	public final static Coord basChar = new Coord(2,0);
-	public final static Coord gaucheChar = new Coord(0,-2);
-	public final static Coord droiteChar = new Coord(0,2);
+	public final static Coord hautChar = new Coord(0,-2);
+	public final static Coord basChar = new Coord(0,2);
+	public final static Coord gaucheChar = new Coord(-2,0);
+	public final static Coord droiteChar = new Coord(2,0);
 	
 	// RECHARGE ROBOT DANS UNE BASE
 	

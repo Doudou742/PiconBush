@@ -2,8 +2,6 @@ package personnages;
 
 import java.util.List;
 
-import plateaux.Plateau;
-
 public class Char extends Robot {
 	private static int deplacement;
 	private static int coutAction;
@@ -13,6 +11,7 @@ public class Char extends Robot {
 
 	public Char(Vue vue,int equipe, int x, int y) {
 		super(vue, x, y, equipe);
+		// TODO Auto-generated constructor stub
 		super.setEnergie(Constantes.getEnergieTank());
 		deplacement=Constantes.getDeplacementTank();
 		coutAction=Constantes.getCoutTirTank();
@@ -20,51 +19,26 @@ public class Char extends Robot {
 		degat=Constantes.getDegatsTank();
 	}
 	
-	
-	
-	public boolean tirer(Coord direction){
-		Coord coordBoucle= new Coord(this.getCoordonnee().getPositionX(), this.getCoordonnee().getPositionY()); 	// Coordonnées de la cellule courante de la boucle
-		boolean peutPasTirer, robotEnnemie; 	// Savoir si : on peut tirer/il y a un robot ennemie sur la case.
+	public boolean tirer(Cellule cellule) {
+		if (cellule.estLibre()){
+			return false;
+		}
 		
-		// On tourne pour toute la porté d'un tank.
-		for(int i = 0 ; i<Constantes.getPorteeTank() ; i++){
-			coordBoucle=coordBoucle.ajouterCoord(direction);
-			
-			// On regarde si on sort du plateau. (Le repère du plateau est orienté chelou)
-			if( 
-					coordBoucle.getPositionY()+1 > Plateau.grille[0].length		|| 	// Droite
-					coordBoucle.getPositionX()+1 > Plateau.grille.length 		||	// Bas
-					coordBoucle.getPositionX() < 0								||	// Haut
-					coordBoucle.getPositionY() < 0	)								// Gauche
-			{
+		else if (cellule.getUnRobot() != null) {
+			if (cellule.getUnRobot().getEquipe() == this.getEquipe()) {
 				return false;
 			}
-			
-			// robotEnnemie = Si il y a un robot ennemie sur la case courante.
-			robotEnnemie = 	Plateau.grille[coordBoucle.getPositionX()][coordBoucle.getPositionY()].contienRobot() &&
-							Plateau.grille[coordBoucle.getPositionX()][coordBoucle.getPositionY()].getUnRobot().getEquipe() != this.getEquipe();
-			
-			// On regarde si sur la case il y a :
-			peutPasTirer = 	Plateau.grille[coordBoucle.getPositionX()][coordBoucle.getPositionY()].contiensObstacle() || 	// Un obstacle
-							( Plateau.grille[coordBoucle.getPositionX()][coordBoucle.getPositionY()].contienRobot() && 		// Un robot mais ...
-										Plateau.grille[coordBoucle.getPositionX()][coordBoucle.getPositionY()].getUnRobot().getEquipe() == this.getEquipe() ); // ... De notre equipe
-			
-			
-			if( peutPasTirer ){ // Si il y a un obstacle ou un robot allié
-				return false;	// On ne tire pas.
-			}else if (robotEnnemie && this.peutTirer()){ // Si c'est un robot ennemie et qu'on a assez d'energie
-				super.setEnergie(super.getEnergie() + coutAction); 	// On modifie l'energie du robot qui tire  
-				Plateau.grille[coordBoucle.getPositionX()][coordBoucle.getPositionY()].getUnRobot().subitDegat(); // Et du robot qui est touché.
-				return true; // On a réussi a tirer on sort de la boucle (oui violemment oui)				
+			else {
+				super.setEnergie(super.getEnergie() + coutAction);
+				cellule.getUnRobot().setEnergie(cellule.getUnRobot().getEnergie() + this.degat);
+				return true;
 			}
 		}
-		// Si jamais on est sorti de la porté et qu'on a tiré sur rien (tt les cases étaient vide) Alors on ne peux pas tirer
 		return false;
+		
+		
 	}
 
-	
-	
-	
 	@Override
 	public boolean peutTirer() {
 		// TODO Auto-generated method stub
@@ -72,9 +46,7 @@ public class Char extends Robot {
 	}
 	
 	
-	
-	
-	
+
 	@Override
 	public int getCoutAction() {
 		// TODO Auto-generated method stub
@@ -116,5 +88,14 @@ public class Char extends Robot {
 		}
 		return "error";
 	}
+
+	@Override
+	public void regen() {
+		// TODO Auto-generated method stub
+		super.setEnergie(Constantes.getEnergieTank());
+	}
+	
+	
+	
 
 }

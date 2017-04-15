@@ -1,4 +1,4 @@
-package plateau;
+package personnages;
 
 import java.util.Random;
 
@@ -13,7 +13,13 @@ public class Plateau {
 	private int hauteur;
 	private int percentObst; // pourcentages d'obstacles max 50
 	public static Cellule[][] grille;
-
+	
+	/**
+	 * permet de creer un plateau avec des dimensions et un pourcentage d obstacle
+	 * @param larg
+	 * @param haut
+	 * @param obst
+	 */
 	public Plateau(int larg, int haut, int obst) {
 		grille = new Cellule[larg][haut];
 		this.largeur = larg;
@@ -105,16 +111,16 @@ public class Plateau {
 		String res = "";
 		for (int i = 0; i < Plateau.grille.length; i++) {
 			for (int k = 0; k < Plateau.grille[0].length; k++) {
-				res += "*-";
+				res += "*-----";
 			}
 			res += "*\n";
 			for (int j = 0; j < Plateau.grille[0].length; j++) {
-				res += "|" + Plateau.grille[i][j].toString();
+				res += "|  " + Plateau.grille[i][j].toString() + "  ";
 			}
 			res += "|\n";
 		}
 		for (int k = 0; k < Plateau.grille[0].length; k++) {
-			res += "*-";
+			res += "*-----";
 		}
 		res += "*";
 		System.out.println(res);
@@ -122,31 +128,35 @@ public class Plateau {
 
 	public void afficherParEquipe(int equipe) {
 		String res = "";
+		for(int i = 0;i<Plateau.grille[0].length;i++){
+			res+="   "+i+"   ";
+		}
+		res+="\n";
 		for (int i = 0; i < Plateau.grille.length; i++) {
 			for (int k = 0; k < Plateau.grille[0].length; k++) {
-				res += "*-";
+				res += "*-----";
 			}
-			res += "*\n";
+			res += "*\n"+i;
 			for (int j = 0; j < Plateau.grille[0].length; j++) {
 
 				if (Plateau.grille[i][j].getMine() != 0) {
 					if (equipe == 1 && Plateau.grille[i][j].getMine() % 2 != 0) {
 
-						res += "|" + Plateau.grille[i][j].toString();
+						res += "|  " + Plateau.grille[i][j].toString() + "  ";
 					}
 					if (equipe == 2 && Plateau.grille[i][j].getMine() % 2 == 0) {
 
-						res += "|" + Plateau.grille[i][j].toString();
+						res += "|  " + Plateau.grille[i][j].toString() + "  ";
 					}
 				}
 				if (Plateau.grille[i][j].getMine() == 0) {
-					res += "|" + Plateau.grille[i][j].toString();
+					res += "|  " + Plateau.grille[i][j].toString() + "  ";
 				}
 			}
 			res += "| \n";
 		}
 		for (int k = 0; k < Plateau.grille[0].length; k++) {
-			res += "*-";
+			res += "*-----";
 		}
 		res += "*";
 		System.out.println(res+"\n");
@@ -156,6 +166,11 @@ public class Plateau {
 	public void addMine(Coord coord, int mine) {
 		grille[coord.getPositionX()][coord.getPositionY()].addMine(mine);
 	}
+	
+	/*public void sortRobotBase(){
+		grille[robot.getCoordonnee().getPositionX()][robot.getCoordonnee().getPositionY()].setUnRobot(robot);
+
+	}*/
 
 	public void addBase(Base b) {
 		if (b.getCoordCell().getPositionX() < grille.length && b.getCoordCell().getPositionY() < grille[0].length) {
@@ -195,19 +210,6 @@ public class Plateau {
 		}
 		System.out.println(equipe1);
 		System.out.println(equipe2);
-	}
-	public int percentVie(Robot robot) {
-		int vie;
-		if(robot instanceof Char) {
-			vie = 100*robot.getEnergie()/Constantes.getEnergieTank();
-		}
-		else if(robot instanceof Piegeur) {
-			vie = 100*robot.getEnergie()/Constantes.getEnergiePiegeur();
-		}
-		else {
-			vie = 100*robot.getEnergie()/Constantes.getEnergieTireur();
-		}
-		return vie;
 	}
 
 }

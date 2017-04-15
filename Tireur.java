@@ -14,29 +14,6 @@ public class Tireur extends Robot {
 		super(vue, x, y, equipe);
 		super.setEnergie(Constantes.getEnergieTireur());
 	}
-	
-	public boolean tirer(int direction) { //return true si la direction est valide (entre 1 et 4)
-		if(direction <5 && direction >0) {
-			Coord[] tab_direction= new Coord[]{Constantes.haut,Constantes.gauche,Constantes.bas,Constantes.droite};		
-			Robot unRobot;
-			Coord tmp=this.getCoordonnee().ajouterCoord(tab_direction[direction]);
-				if(Plateau.getCellule(tmp).estLibre()) {
-					tmp=tmp.ajouterCoord(tab_direction[direction]);
-					if(Plateau.getCellule(tmp).contienRobot()) {
-						unRobot = Plateau.getCellule(tmp).getUnRobot();
-						Plateau.getCellule(tmp).getUnRobot().subitDegat(unRobot);
-						this.setEnergie(getEnergie()-getCoutAction());
-					}
-				}
-				else if(Plateau.getCellule(tmp).contienRobot()) {
-					unRobot = Plateau.getCellule(tmp).getUnRobot();
-					Plateau.getCellule(tmp).getUnRobot().subitDegat(unRobot);
-					this.setEnergie(getEnergie()-getCoutAction());
-				}
-				return true;
-		}
-		return false;
-	}
 
 	public int getDeplacement() {
 		return deplacement;

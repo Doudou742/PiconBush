@@ -2,7 +2,6 @@ package personnages;
 
 import java.util.List;
 
-import plateau.Plateau;
 
 abstract public class Robot {
 
@@ -69,12 +68,28 @@ abstract public class Robot {
 	public void subitDegat(Robot robotAttack){
 		if(robotAttack instanceof Char) {
 			this.energie-=6;
+			if(this.getEnergie()<=0){
+				vue.augmenteCptMort();
+			}
 		}
 		else if(robotAttack instanceof Tireur) {
 			this.energie-=3;
+			if(this.getEnergie()<=0){
+				vue.augmenteCptMort();
+			}
 		}
 		else {
 			this.energie-=2;
+			if(this.getEnergie()<=0){
+				vue.augmenteCptMort();
+			}
+		}
+}
+	
+	public void subitMine(){
+		this.setEnergie(this.getEnergie()-2);
+		if(this.getEnergie()<=0){
+			this.vue.augmenteCptMort();
 		}
 	}
 	

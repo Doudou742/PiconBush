@@ -1,9 +1,10 @@
-
+package personnages;
 
 
 public class Vue {
 
 	private int equipe;
+	private int cptMort=0;
 	//private Plateau plateau;
 	
 	public Vue(int equipe, Plateau plateau){
@@ -32,11 +33,7 @@ public class Vue {
 		
 	}
 	
-	
-	public void subitTir(Coord coordonnee){
-		Plateau.grille[coordonnee.getPositionX()][coordonnee.getPositionY()].getUnRobot().subitDegat();
-		
-	}
+
 	
 	//case vide ? 
 	public boolean estDisponible(Coord coordonnee){
@@ -55,7 +52,17 @@ public class Vue {
 	
 	//savoir si il est vivant ?
 	public boolean estOK(Robot robot){
-		return robot.getEnergie()!=0;
+		return robot.getEnergie()>0;
 		//vivant si sn energie est differente de 0 
 	}
+
+	public int getCptMort() {
+		return cptMort;
+	}
+
+	public void augmenteCptMort() {
+		this.cptMort++;
+	}
+	
+	
 }

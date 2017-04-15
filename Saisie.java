@@ -1,11 +1,11 @@
 package personnages;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
-import plateau.Plateau;
 
 public class Saisie {
 
@@ -19,20 +19,20 @@ public class Saisie {
 		unScanner = new Scanner(System.in);
 
 	}
-	
-	public Coord DeplacerDemande(){
+
+public static Coord DeplacerDemande(){
 		
 		ImageIcon iconQ = new ImageIcon("image/iconQ.png");
 		String l;
 		String c;
 		
 		do {
-		Object ligne = JOptionPane.showInputDialog(null, "Ligne? :", "Deplacer un robot",JOptionPane.QUESTION_MESSAGE, iconQ, null, "10");
+		Object ligne = JOptionPane.showInputDialog(null, "Ligne? :", "Choisir un robot",JOptionPane.QUESTION_MESSAGE, iconQ, null,"");
 		l = ligne.toString();
 		} while(! estInt(l) || Integer.valueOf(l) > Plateau.grille.length);
 		
 		do {
-		Object colonne = JOptionPane.showInputDialog(null, "Colonne? :", "Deplacer un robot",JOptionPane.QUESTION_MESSAGE, iconQ, null, "10");
+		Object colonne = JOptionPane.showInputDialog(null, "Colonne? :", "Choisir un robot",JOptionPane.QUESTION_MESSAGE, iconQ, null, "");
 		c = colonne.toString();
 		
 		} while(! estInt(c) || Integer.valueOf(c) > Plateau.grille[0].length);
@@ -42,7 +42,7 @@ public class Saisie {
 	}
 
 	public static String queVoulezVousFaire() {
-		String[] choix = { "Bouger un robot", "Tirer/Poser une mine", "Poser un robot" };
+		String[] choix = { "Bouger un robot","Sortir un robot de la base", "Tirer/Poser une mine"};
 		JOptionPane jop = new JOptionPane(), jop2 = new JOptionPane();
 		String nom = (String) jop.showInputDialog(null, "Que voulez-vous faire ?", "Choix action",
 				JOptionPane.QUESTION_MESSAGE, null, choix, choix[0]);
@@ -66,18 +66,18 @@ public class Saisie {
 		String b = "";
 		do {
 			
-			b = jop.showInputDialog(null, "Quel est son abscisse ?", "Choix X", JOptionPane.QUESTION_MESSAGE);
+			b = jop.showInputDialog(null, "Ligne ?", "Choix déplacement", JOptionPane.QUESTION_MESSAGE);
 
 			if (estNum(b)) {
 				x = Integer.parseInt(b);
 			}
 			if (x < 0 || x > 20) {
-				jop.showMessageDialog(null, "Votre abscisse n'est pas correcte", "Erreur", JOptionPane.ERROR_MESSAGE);
+				jop.showMessageDialog(null, "Votre ligne n'est pas correcte", "Erreur", JOptionPane.ERROR_MESSAGE);
 			}
 		} while (x > 20 || x < 0 || !estNum(b));
 
 		do {
-				b=jop.showInputDialog(null, "Quel est son ordonnée ?", "Choix Y", JOptionPane.QUESTION_MESSAGE);
+				b=jop.showInputDialog(null, "Quel est sa colonne ?", "Choix déplacement", JOptionPane.QUESTION_MESSAGE);
 				if(estNum(b)){
 					y=Integer.parseInt(b);
 				}
@@ -119,6 +119,17 @@ public class Saisie {
 		this.message = message;
 	}
 	
+	
+	public static String choixRobotDebut() {
+		String tmp = "";
+		do {
+			JOptionPane jop = new JOptionPane();
+			tmp = jop.showInputDialog(null, "Quel type de robot voulez vous bouger ?  ");
+		} while (!tmp.equals("Char") && !tmp.equals("Tireur") && !tmp.equals("Piegeur") );
+		return tmp;
+	}
+	
+	
 	public static boolean estInt(String chaine) {
 
 		for (int idx = 0; idx < chaine.length(); idx++) {
@@ -130,8 +141,8 @@ public class Saisie {
 		}
 		return true;
 	}
-
-public void configurationJoueur(Vue uneVue, Base uneBase, boolean equipe){
+	//probleme si on choisit 5 tireurs ou 5 piegeurs ou 5 char
+	public void configurationJoueur(Vue uneVue, Base uneBase, boolean equipe){
 		
 		final ImageIcon iconS = new ImageIcon("image/iconS.png");
 		final ImageIcon iconC = new ImageIcon("image/iconC.png");
@@ -147,6 +158,7 @@ public void configurationJoueur(Vue uneVue, Base uneBase, boolean equipe){
 		String nbCB;
 		String nbPB;
 		
+		int[] nbRobotDeChaqueType = new int[3];
 		int nbrobot = 0;
 		int nbrobotB = 0;
 		final int max = 5;
@@ -159,10 +171,17 @@ public void configurationJoueur(Vue uneVue, Base uneBase, boolean equipe){
 			} while (!estInt(nbT));
 			if (Integer.valueOf(nbT) <= max && nbrobot <= max) {
 				nbrobot += Integer.valueOf(nbT);
-				for (int idx = 0; idx < Integer.valueOf(nbT); idx++) {
-
-					uneBase.addRobot(new Tireur(uneVue, 1, 0, 0));
+				
+				for(int i=0;i<Integer.valueOf(nbT);i++){
+					uneBase.getDepart().add(new Tireur(uneVue,1,0,0));
 				}
+				//nbRobotDeChaqueType[0] = Integer.valueOf(nbT);
+				//for (int idx = 0; idx < Integer.valueOf(nbT); idx++) {
+
+					//uneBase.addRobot(new Tireur(uneVue, 1, 0, 0));
+					//uneBase.addRobotDansTableau(new Tireur(uneVue, 1, 0, 0), idx);
+					
+				//}
 			}
 		} while (Integer.valueOf(nbT) > max || nbrobot > max);
 		
@@ -176,12 +195,18 @@ public void configurationJoueur(Vue uneVue, Base uneBase, boolean equipe){
 					nbP = nb.toString();
 				} while (!estInt(nbP));
 					nbrobot += Integer.valueOf(nbP);
+					//nbRobotDeChaqueType[1] = Integer.valueOf(nbP);
 					
-					
+					for(int i=0;i<Integer.valueOf(nbP);i++){
+						uneBase.getDepart().add(new Piegeur(uneVue,1,0,0));
+					}
+					/*
 					for (int idx = 0; idx < Integer.valueOf(nbP); idx++) {
 
-						uneBase.addRobot(new Piegeur(uneVue, 1, 0, 0));
+						//uneBase.addRobot(new Piegeur(uneVue, 1, 0, 0));
+						uneBase.addRobotDansTableau(new Piegeur(uneVue, 1, 0, 0), idx);
 					}
+					*/
 				
 			} while (nbrobot > max);
 		}
@@ -194,14 +219,21 @@ public void configurationJoueur(Vue uneVue, Base uneBase, boolean equipe){
 					nbC = nb.toString();
 				} while (!estInt(nbC));
 					nbrobot += Integer.valueOf(nbC);
+					//nbRobotDeChaqueType[2] = Integer.valueOf(nbC);
 					
-					
+					for(int i=0;i<Integer.valueOf(nbC);i++){
+						uneBase.getDepart().add(new Char(uneVue,1,0,0));
+					}
+					/*
 					for (int idx = 0; idx < Integer.valueOf(nbC); idx++) {
 
-						uneBase.addRobot(new Piegeur(uneVue, 1, 0, 0));
+						//uneBase.addRobot(new Piegeur(uneVue, 1, 0, 0));
+						uneBase.addRobotDansTableau(new Char(uneVue, 1, 0, 0), idx);
 					}
-				
+					*/
+					
 			} while (nbrobot > max);
+			
 		}
 		
 		JOptionPane.showMessageDialog(null,"Votre armée a été configurer avec succès !","Configuration de l'armée Equipe 1", JOptionPane.INFORMATION_MESSAGE, iconS);
@@ -217,10 +249,16 @@ public void configurationJoueur(Vue uneVue, Base uneBase, boolean equipe){
 				} while (!estInt(nbTB));
 				if (Integer.valueOf(nbTB) <= max && nbrobotB <= max) {
 					nbrobotB += Integer.valueOf(nbTB);
-					for (int idx = 0; idx < Integer.valueOf(nbTB); idx++) {
-
-						uneBase.addRobot(new Tireur(uneVue, 2, Plateau.grille.length -1, Plateau.grille[0].length));
+					//nbRobotDeChaqueType[0] = Integer.valueOf(nbTB);
+					for(int i=0;i<Integer.valueOf(nbTB);i++){
+						uneBase.getDepart().add(new Tireur(uneVue,2,Plateau.grille.length-1,Plateau.grille[0].length-1));
 					}
+					/*
+					for (int idx = 0; idx < Integer.valueOf(nbTB); idx++) {
+						//uneBase.addRobot(new Tireur(uneVue, 1, Plateau.grille.length -1, Plateau.grille[0].length));
+						uneBase.addRobotDansTableau(new Tireur(uneVue, 2, Plateau.grille.length -1, Plateau.grille[0].length), idx);
+					}
+					*/
 				}
 			} while (Integer.valueOf(nbTB) > max || nbrobotB > max);
 			
@@ -234,12 +272,18 @@ public void configurationJoueur(Vue uneVue, Base uneBase, boolean equipe){
 						nbPB = nb.toString();
 					} while (!estInt(nbPB));
 						nbrobotB += Integer.valueOf(nbPB);
+					//	nbRobotDeChaqueType[1] = Integer.valueOf(nbPB);
+						for(int i=0;i<Integer.valueOf(nbPB);i++){
+							uneBase.getDepart().add(new Piegeur(uneVue,2,Plateau.grille.length-1,Plateau.grille[0].length-1));
+						}
 						
-						
+						/*
 						for (int idx = 0; idx < Integer.valueOf(nbPB); idx++) {
 
-							uneBase.addRobot(new Piegeur(uneVue, 2, Plateau.grille.length -1, Plateau.grille[0].length));
+							//uneBase.addRobot(new Piegeur(uneVue, 1, Plateau.grille.length -1, Plateau.grille[0].length));
+							uneBase.addRobotDansTableau(new Piegeur(uneVue, 2, Plateau.grille.length -1, Plateau.grille[0].length), idx);
 						}
+						*/
 					
 				} while (nbrobotB > max);
 			}
@@ -252,12 +296,17 @@ public void configurationJoueur(Vue uneVue, Base uneBase, boolean equipe){
 						nbCB = nb.toString();
 					} while (!estInt(nbCB));
 						nbrobotB += Integer.valueOf(nbCB);
-						
-						
+						//nbRobotDeChaqueType[2] = Integer.valueOf(nbCB);
+						for(int i=0;i<Integer.valueOf(nbCB);i++){
+							uneBase.getDepart().add(new Char(uneVue,2,Plateau.grille.length-1,Plateau.grille[0].length-1));
+						}
+						/*
 						for (int idx = 0; idx < Integer.valueOf(nbCB); idx++) {
 
-							uneBase.addRobot(new Piegeur(uneVue, 2,Plateau.grille.length -1, Plateau.grille[0].length));
+							//uneBase.addRobot(new Piegeur(uneVue, 1,Plateau.grille.length -1, Plateau.grille[0].length));
+							uneBase.addRobotDansTableau(new Char(uneVue, 2, Plateau.grille.length -1, Plateau.grille[0].length), idx);
 						}
+						*/
 					
 				} while (nbrobotB > max);
 			}
@@ -267,13 +316,12 @@ public void configurationJoueur(Vue uneVue, Base uneBase, boolean equipe){
 			
 		}
 		
-		
 	}
 
 	public static void main(String[] args) {
 		Saisie tank = new Saisie("Quel robot voulez vous bouger ?");
 		String a = "";
-		presentation();
+		queVoulezVousFaire();
 		Coord test = choixCoord();
 	}
 }
